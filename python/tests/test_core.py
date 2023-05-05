@@ -1,5 +1,5 @@
 import unittest
-from arrays.static_array import Array
+from arrays.core import Array
 
 class TestArray(unittest.TestCase):
     # __init__
