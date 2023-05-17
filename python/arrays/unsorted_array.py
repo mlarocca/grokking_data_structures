@@ -1,4 +1,4 @@
-from core import Array
+from arrays.core import Array
 
 def insert_in_unsorted_array(new_entry, array, size) -> int:
     '''

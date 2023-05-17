@@ -27,40 +27,40 @@ class Array():
          |  '''
     def __init__(self, size: int, typecode: str = 'l'):
         if size <= 0:
-            raise(Exception(f'Invalid array size (must be positive): {size}'))
+            raise(ValueError(f'Invalid array size (must be positive): {size}'))
         self._size = size
         self._array = array.array(typecode, [0] * size)
     
-    def __getitem__(self, key: int) -> Union[int, float]:
+    def __getitem__(self, index: int) -> Union[int, float]:
         """
         Get the value at the given index.
 
         Parameters:
-            key (int): The index to get the value from.
+            index (int): The index to get the value from.
 
         Returns:
             Union[int, float]: The value at the given index.
         """
 
-        if key < 0 or key >= self._size:
-            raise(Exception('array index out of range'))
-        return self._array[key]
+        if index < 0 or index >= self._size:
+            raise(IndexError('array index out of range'))
+        return self._array[index]
         
-    def __setitem__(self, key: int, val: Union[int, float]) -> None:
+    def __setitem__(self, index: int, val: Union[int, float]) -> None:
         """
         Set the value at the given index.
 
         Parameters:
-            key (int): The index to set the value at.
+            index (int): The index to set the value at.
             val (Union[int, float]): The value to set.
 
         Returns:
             None
         """
 
-        if key < 0 or key >= self._size:
-            raise(Exception('array assignment index out of range'))
-        self._array[key] = val
+        if index < 0 or index >= self._size:
+            raise(IndexError('array assignment index out of range'))
+        self._array[index] = val
     
     def __len__(self):
         """

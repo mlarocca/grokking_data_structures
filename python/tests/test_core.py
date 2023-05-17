@@ -14,12 +14,12 @@ class TestArray(unittest.TestCase):
         
     def test_init_invalid_size(self):
         """Test initializing Array with invalid size"""
-        with self.assertRaises(Exception):
+        with self.assertRaises(ValueError):
             Array(-1)
             
     def test_init_invalid_typecode(self):
         """Test initializing Array with invalid typecode"""
-        with self.assertRaises(Exception):
+        with self.assertRaises(ValueError):
             Array(5, 'x')
 
     # __get_item__
@@ -41,9 +41,9 @@ class TestArray(unittest.TestCase):
     def test_get_item_invalid(self):
         """Test getting an item with an invalid index"""
         arr = Array(5)
-        with self.assertRaises(Exception):
+        with self.assertRaises(IndexError):
             arr[-1]
-        with self.assertRaises(Exception):
+        with self.assertRaises(IndexError):
             arr[5]
 
     # __set_item__
@@ -72,9 +72,9 @@ class TestArray(unittest.TestCase):
     def test_set_item_invalid_index(self):
         """Test setting an item with an invalid index"""
         arr = Array(5)
-        with self.assertRaises(Exception):
+        with self.assertRaises(IndexError):
             arr[-1] = 1
-        with self.assertRaises(Exception):
+        with self.assertRaises(IndexError):
             arr[5] = 1
     
     # __len__
