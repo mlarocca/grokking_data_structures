@@ -1,11 +1,11 @@
 import arrays.core as core
 from typing import Union
 
-class SortedArray(object):
+class SortedArray():
     '''Return a new sorted array whose items are restricted by typecode, and
        that can contain at most `max_size` elements.
        
-       Arrays represent basic values and behave very much like lists, except
+       Arrays represent basic values and behave very much like Python list, except
        the type of objects stored in them is constrained. The type is specified
        at object creation time by using a type code, which is a single character.
        The following type codes are defined:
@@ -26,13 +26,13 @@ class SortedArray(object):
            'd'         floating point     8
 
         Parameters:
-            max_size (int): The maximum number of elements the array can hold.
+            max_capacity (int): The maximum number of elements the array can hold.
             typecode (str, optional): The typecode of the array. Defaults to 'l' for int.
 
        '''
-    def __init__(self, max_size: int, typecode: str = 'l'):
-        self._array = core.Array(max_size, typecode)
-        self._max_size = max_size
+    def __init__(self, max_capacity: int, typecode: str = 'l'):
+        self._array = core.Array(max_capacity, typecode)
+        self._max_size = max_capacity
         # The actual number of elements stored in the array
         self._size = 0
 
@@ -43,7 +43,7 @@ class SortedArray(object):
     
     def __getitem__(self, index) -> Union[int, float]:
         if index >= self._size:
-            raise(f'Index out of bound: {index}')
+            raise(IndexError(f'Index out of bound: {index}'))
         return self._array[index]
     
     

@@ -50,7 +50,7 @@ class TestSortedArray(unittest.TestCase):
         with self.assertRaises(IndexError):
             array[2]
 
-    def test_index_out_of_bounds(self):
+    def test_negative_index(self):
         """Test that indexing with a negative index raises an error."""
         array = SortedArray(3, 'i')
         array.insert(431)

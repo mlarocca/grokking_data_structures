@@ -5,7 +5,7 @@ class Array():
     '''Return a new array whose items are restricted by typecode, and
          |  that can contain at most `size` elements.
          |  
-         |  Arrays represent basic values and behave very much like lists, except
+         |  Arrays represent basic values and behave very much like Python list, except
          |  the type of objects stored in them is constrained. The type is specified
          |  at object creation time by using a type code, which is a single character.
          |  The following type codes are defined:
