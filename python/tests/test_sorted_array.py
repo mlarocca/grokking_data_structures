@@ -138,50 +138,50 @@ class TestSortedArray(unittest.TestCase):
 
     # search (naive)        
 
-    def test_find_naive_found(self):
+    def test_linear_search_found(self):
         """Test searching for a value that is in the array."""
         array = SortedArray(4, 'i')
         array.insert(2)
         array.insert(1)
         array.insert(3)
-        self.assertEqual(array.find_naive(2), 1)
+        self.assertEqual(array.linear_search(2), 1)
         array.insert(-43)
-        self.assertEqual(array.find_naive(-43), 0)
+        self.assertEqual(array.linear_search(-43), 0)
         array = SortedArray(3, 'd')
         array.insert(21.3)
         array.insert(3.1415)
-        self.assertEqual(array.find_naive(3.1415), 0)
+        self.assertEqual(array.linear_search(3.1415), 0)
     
-    def test_find_naive_not_found(self):
+    def test_linear_search_not_found(self):
         """Test searching for a value that is not in the array."""
         array = SortedArray(5, 'i')
         array.insert(3)
         array.insert(1)
         array.insert(2)
-        self.assertEqual(array.find_naive(4), None)
+        self.assertEqual(array.linear_search(4), None)
     
-    def test_find_naive_empty(self):
+    def test_linear_search_empty(self):
         """Test searching an empty array."""
         array = SortedArray(2, 'i')
-        self.assertEqual(array.find_naive(1), None)
+        self.assertEqual(array.linear_search(1), None)
 
-    def test_find_naive_empty_chunk_not_included(self):
+    def test_linear_search_empty_chunk_not_included(self):
         """Test that only the filled portion of the array is searched."""
         array = SortedArray(5, 'i')
         array.insert(3)
         array.insert(1)
         array.insert(2)
-        self.assertEqual(array.find_naive(0), None)
+        self.assertEqual(array.linear_search(0), None)
         array.insert(0)
-        self.assertEqual(array.find_naive(0), 0)
+        self.assertEqual(array.linear_search(0), 0)
         array = SortedArray(5, 'd')
         array.insert(-1.0)
         array.insert(-3)
         array.insert(-2)
-        self.assertEqual(array.find_naive(0), None)
-        self.assertEqual(array.find_naive(0.0), None)
+        self.assertEqual(array.linear_search(0), None)
+        self.assertEqual(array.linear_search(0.0), None)
         array.insert(0)
-        self.assertEqual(array.find_naive(0), 3)
+        self.assertEqual(array.linear_search(0), 3)
 
 
     # search (binary search)
@@ -192,14 +192,14 @@ class TestSortedArray(unittest.TestCase):
         array.insert(1)
         array.insert(3)
         array.insert(2)
-        self.assertEqual(array.find(2), 1)
+        self.assertEqual(array.binary_search(2), 1)
         array.insert(-1)
         array.insert(23)
         array.insert(-2)
-        self.assertEqual(array.find(2), 3)
-        self.assertEqual(array.find(-1), 1)
-        self.assertEqual(array.find(-2), 0)
-        self.assertEqual(array.find(23), 5)
+        self.assertEqual(array.binary_search(2), 3)
+        self.assertEqual(array.binary_search(-1), 1)
+        self.assertEqual(array.binary_search(-2), 0)
+        self.assertEqual(array.binary_search(23), 5)
     
     def test_find_not_found(self):
         """Test finding a value that is not in the array."""
@@ -207,8 +207,8 @@ class TestSortedArray(unittest.TestCase):
         array.insert(1)
         array.insert(2)
         array.insert(3)
-        self.assertEqual(array.find(4), None)
-        self.assertEqual(array.find(-10), None)
+        self.assertEqual(array.binary_search(4), None)
+        self.assertEqual(array.binary_search(-10), None)
 
     def test_find_empty_chunk_not_included(self):
         """Test that only the filled portion of the array is searched."""
@@ -216,23 +216,23 @@ class TestSortedArray(unittest.TestCase):
         array.insert(3)
         array.insert(1)
         array.insert(2)
-        self.assertEqual(array.find(0), None)
+        self.assertEqual(array.binary_search(0), None)
         array.insert(0)
-        self.assertEqual(array.find(0), 0)
+        self.assertEqual(array.binary_search(0), 0)
         array = SortedArray(5, 'd')
         array.insert(-1.0)
         array.insert(-3)
         array.insert(-2)
-        self.assertEqual(array.find(0), None)
-        self.assertEqual(array.find(0.0), None)
+        self.assertEqual(array.binary_search(0), None)
+        self.assertEqual(array.binary_search(0.0), None)
         array.insert(0)
-        self.assertEqual(array.find(0), 3)        
+        self.assertEqual(array.binary_search(0), 3)        
     
     def test_find_empty(self):
         """Test finding a value in an empty array."""
         array = SortedArray(5, 'i')
-        self.assertEqual(array.find(1), None)
-        self.assertEqual(array.find(0), None)
+        self.assertEqual(array.binary_search(1), None)
+        self.assertEqual(array.binary_search(0), None)
 
 
     # delete
