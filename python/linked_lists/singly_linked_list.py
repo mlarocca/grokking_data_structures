@@ -26,7 +26,7 @@ class SinglyLinkedList:
             _next: A reference to the next node in the list.
         """
 
-        def __init__(self, data: Any, next_node = None) -> None:
+        def __init__(self, data: Any, next_node: SinglyLinkedList.Node = None) -> None:
             """
             Initialize a new Node object.
 
@@ -81,6 +81,7 @@ class SinglyLinkedList:
 
             return self._data
 
+
         def next(self) -> SinglyLinkedList.Node:
             """
             Return the successor of the current node.
@@ -93,6 +94,7 @@ class SinglyLinkedList:
             """
 
             return self._next
+
 
         def has_next(self) -> bool:
             """
@@ -119,7 +121,9 @@ class SinglyLinkedList:
 
             self._next = next_node
 
+
     # --- SinglyLinkedList methods ---
+
 
     def __init__(self) -> None:
         """
@@ -201,7 +205,7 @@ class SinglyLinkedList:
         return size
 
 
-    def add_in_front(self, data: Any) -> None:
+    def insert_in_front(self, data: Any) -> None:
         """
         Add a node to the beginning of the list.
 
@@ -213,7 +217,7 @@ class SinglyLinkedList:
         self._head = SinglyLinkedList.Node(data, old_head)
 
 
-    def add_to_back(self, data: Any) -> None:
+    def insert_to_back(self, data: Any) -> None:
         """
         Append a node to the end of the list.
 
@@ -253,7 +257,7 @@ class SinglyLinkedList:
         return result
 
 
-    def search(self, target: Any) -> Optional[SinglyLinkedList.Node]:
+    def _search(self, target: Any) -> Optional[SinglyLinkedList.Node]:
         """
         Search the list for a node with the data matching `target`, and return the node found.
 
