@@ -47,7 +47,7 @@ python -m unittest tests/test_dynamic_array.py
 
 ### Singly-Linked Lists [Python](https://github.com/mlarocca/gda/blob/main/python/linked_lists/singly_linked_list.py) |
 
-![Singly-Linked list](./readme/thumbs/CH06_UN05_La_Rocca3.md.jpg)
+![Singly-linked list](./readme/thumbs/CH06_UN04_La_Rocca3.md.jpg)
 
 #### Run Tests: 
 From ./python folder, run
@@ -57,7 +57,7 @@ python -m unittest tests/test_singly_linked_list.py
 
 ### Sorted Singly-Linked Lists [Python](https://github.com/mlarocca/gda/blob/main/python/linked_lists/sorted_singly_linked_list.py) |
 
-![Singly-Linked list](./readme/thumbs/CH06_UN05_La_Rocca3.md.jpg)
+![Insertion in a sorted singly-linked list](./readme/thumbs/CH06_UN11_La_Rocca3.md.jpg)
 
 #### Run Tests: 
 From ./python folder, run
@@ -67,7 +67,7 @@ python -m unittest tests/test_sorted_singly_linked_list.py
 
 ### Doubly-Linked Lists [Python](https://github.com/mlarocca/gda/blob/main/python/linked_lists/doubly_linked_list.py) |
 
-![Singly-Linked list](./readme/thumbs/CH06_UN05_La_Rocca3.md.jpg)
+![A node of a doubly-linked list](./readme/thumbs/CH06_UN12_La_Rocca3.md.jpg)
 
 #### Run Tests: 
 From ./python folder, run
