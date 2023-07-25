@@ -64,3 +64,13 @@ From ./python folder, run
 ```console
 python -m unittest tests/test_sorted_singly_linked_list.py
 ```
+
+### Doubly-Linked Lists [Python](https://github.com/mlarocca/gda/blob/main/python/linked_lists/doubly_linked_list.py) |
+
+![Singly-Linked list](./readme/thumbs/CH06_UN05_La_Rocca3.md.jpg)
+
+#### Run Tests: 
+From ./python folder, run
+```console
+python -m unittest tests/test_doubly_linked_list.py
+```
