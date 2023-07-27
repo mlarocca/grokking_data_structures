@@ -164,7 +164,7 @@ class SinglyLinkedList:
             str: The string representation of the linked list nodes.
         """
 
-        return '->'.join(self.traverse(repr))
+        return f'SinglyLinkedList({"->".join(self.traverse(repr))})'
 
 
     def __str__(self) -> str:
@@ -184,6 +184,25 @@ class SinglyLinkedList:
         """
 
         return '->'.join(self.traverse(str))
+
+
+    def __iter__(self):
+        '''
+        Iterate over the values in the linked list.
+
+        Parameters:
+            None
+
+        Functionality:
+            Iterates over the values in the linked list. The iteration starts at the beginning
+            of the list and goes on until it reaches the tail of the list.
+        '''
+
+        current = self._head
+        while current is not None:
+            data = current.data()
+            current = current.next()
+            yield data
 
 
     def size(self) -> int:

@@ -24,16 +24,16 @@ class TestSinglyLinkedList(unittest.TestCase):
 
     def test_repr(self):
         linked_list = SinglyLinkedList()
-        self.assertEqual(repr(linked_list), '')
+        self.assertEqual(repr(linked_list), 'SinglyLinkedList()')
 
         linked_list.insert_in_front(1)
-        self.assertEqual(repr(linked_list), '1')
+        self.assertEqual(repr(linked_list), 'SinglyLinkedList(1)')
 
         linked_list.insert_in_front(2)
-        self.assertEqual(repr(linked_list), '2->1')
+        self.assertEqual(repr(linked_list), 'SinglyLinkedList(2->1)')
 
         linked_list.insert_to_back(3.14)
-        self.assertEqual(repr(linked_list), '2->1->3.14')
+        self.assertEqual(repr(linked_list), 'SinglyLinkedList(2->1->3.14)')
 
 
     def test_str(self):
@@ -48,6 +48,22 @@ class TestSinglyLinkedList(unittest.TestCase):
 
         linked_list.insert_to_back('c')
         self.assertEqual(str(linked_list), 'b->a->c')
+
+
+    def test_iter(self):
+        linked_list = SinglyLinkedList()
+
+        # Iterate over empty list
+        self.assertEqual(list(linked_list), [])
+
+        # Iterate over non-empty list
+        linked_list.insert_in_front(1)
+        linked_list.insert_in_front(2)
+        linked_list.insert_to_back(3.14)
+        linked_list.insert_to_back("AC")
+
+        expected = [2, 1, 3.14, "AC"]
+        self.assertEqual(list(linked_list), expected)
 
 
     def test_size(self):
