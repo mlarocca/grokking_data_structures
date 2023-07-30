@@ -77,6 +77,25 @@ class TestSinglyLinkedList(unittest.TestCase):
         self.assertEqual(linked_list.size(), 2)
 
 
+    def test_is_empty(self):
+        linked_list = DoublyLinkedList()
+        self.assertTrue(linked_list.is_empty())
+        linked_list.insert_in_front(1)
+        self.assertFalse(linked_list.is_empty())
+        linked_list.insert_in_front(2)
+        linked_list.insert_in_front(3)
+        self.assertFalse(linked_list.is_empty())
+
+        linked_list.delete(3)
+        self.assertFalse(linked_list.is_empty())
+
+        linked_list.delete(2)
+        self.assertFalse(linked_list.is_empty())
+
+        linked_list.delete(1)
+        self.assertTrue(linked_list.is_empty())
+
+
     def test_add_in_front(self):
         linked_list = DoublyLinkedList()
 
@@ -219,6 +238,59 @@ class TestSinglyLinkedList(unittest.TestCase):
         self.assertIsNone(linked_list._head.prev())
         self.assertIsNone(linked_list._head.next().next().next().next())
         self.assertEqual(str(linked_list), "6<->1<->7<->8")
+
+
+    def test_delete_from_front(self):
+        linked_list = DoublyLinkedList()
+
+        # Delete from empty list
+        with self.assertRaises(ValueError):
+            linked_list.delete_from_front()
+
+        # Delete from list with one element
+        linked_list.insert_in_front(1)
+        self.assertEqual(linked_list.delete_from_front(), 1)
+        self.assertTrue(linked_list.is_empty())
+
+        # Delete from list with multiple elements
+        linked_list.insert_in_front(2)
+        linked_list.insert_in_front(1)
+        linked_list.insert_in_front(4)
+        self.assertEqual(linked_list.delete_from_front(), 4)
+        self.assertEqual(len(linked_list), 2)
+        self.assertEqual(linked_list._head.data(), 1)
+        self.assertIsNone(linked_list._head.prev())
+
+        self.assertEqual(linked_list.delete_from_front(), 1)
+        self.assertEqual(len(linked_list), 1)
+        self.assertEqual(linked_list._head.data(), 2)
+        self.assertIsNone(linked_list._head.prev())
+
+
+    def test_delete_from_back(self):
+        linked_list = DoublyLinkedList()
+
+        # Delete from empty list
+        with self.assertRaises(ValueError):
+            linked_list.delete_from_back()
+
+        # Delete from list with one element
+        linked_list.insert_in_front(1)
+        self.assertEqual(linked_list.delete_from_back(), 1)
+        self.assertTrue(linked_list.is_empty())
+
+        # Delete from list with multiple elements
+        linked_list.insert_in_front(2)
+        linked_list.insert_in_front(1)
+        linked_list.insert_in_front(3)
+        self.assertEqual(linked_list.delete_from_back(), 2)
+        self.assertEqual(len(linked_list), 2)
+        self.assertEqual(linked_list._tail.data(), 1)
+        self.assertIsNone(linked_list._tail.next())
+        self.assertEqual(linked_list.delete_from_back(), 1)
+        self.assertEqual(len(linked_list), 1)
+        self.assertEqual(linked_list._tail.data(), 3)
+        self.assertIsNone(linked_list._tail.next())
 
 
 class TestNode(unittest.TestCase):

@@ -63,3 +63,14 @@ class TestBag(unittest.TestCase):
 
         expected = {1, 2, 3.14, "AC"}
         self.assertSetEqual(set(bag), expected)
+
+
+    def test_is_empty(self):
+        bag = Bag()
+
+        # Check empty bag
+        self.assertTrue(bag.is_empty())
+
+        # Check non-empty bag
+        bag.insert(1)
+        self.assertFalse(bag.is_empty())

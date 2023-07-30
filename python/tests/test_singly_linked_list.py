@@ -77,6 +77,25 @@ class TestSinglyLinkedList(unittest.TestCase):
         self.assertEqual(linked_list.size(), 2)
 
 
+    def test_is_empty(self):
+        linked_list = SinglyLinkedList()
+        self.assertTrue(linked_list.is_empty())
+        linked_list.insert_in_front(1)
+        self.assertFalse(linked_list.is_empty())
+        linked_list.insert_in_front(2)
+        linked_list.insert_in_front(3)
+        self.assertFalse(linked_list.is_empty())
+
+        linked_list.delete(3)
+        self.assertFalse(linked_list.is_empty())
+
+        linked_list.delete(2)
+        self.assertFalse(linked_list.is_empty())
+
+        linked_list.delete(1)
+        self.assertTrue(linked_list.is_empty())
+
+
     def test_add_in_front(self):
         linked_list = SinglyLinkedList()
 
@@ -159,6 +178,7 @@ class TestSinglyLinkedList(unittest.TestCase):
         linked_list.delete(1)
         self.assertEqual(len(linked_list), 0)
 
+
     def test_delete_invalid(self):
         linked_list = SinglyLinkedList()
         linked_list.insert_in_front(3)
@@ -167,6 +187,26 @@ class TestSinglyLinkedList(unittest.TestCase):
 
         with self.assertRaises(ValueError):
             linked_list.delete(4)
+
+
+    def test_delete_from_front(self):
+        linked_list = SinglyLinkedList()
+
+        # Delete from empty list
+        with self.assertRaises(ValueError):
+            linked_list.delete_from_front()
+
+        # Delete from list with one element
+        linked_list.insert_in_front(1)
+        self.assertEqual(linked_list.delete_from_front(), 1)
+        self.assertTrue(linked_list.is_empty())
+
+        # Delete from list with multiple elements
+        linked_list.insert_in_front(2)
+        linked_list.insert_in_front(1)
+        self.assertEqual(linked_list.delete_from_front(), 1)
+        self.assertEqual(len(linked_list), 1)
+        self.assertEqual(linked_list._head.data(), 2)
 
 
 class TestNode(unittest.TestCase):

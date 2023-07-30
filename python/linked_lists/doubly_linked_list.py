@@ -273,6 +273,20 @@ class DoublyLinkedList:
         return size
 
 
+    def is_empty(self) -> bool:
+        """
+        Check if the linked list is empty.
+
+        Parameters:
+            None
+
+        Returns:
+            bool: True if the linked list is empty, False otherwise.
+        """
+
+        return self._head is None
+
+
     def insert_in_front(self, data: Any) -> None:
         """
         Add a node to the beginning of the list.
@@ -381,3 +395,53 @@ class DoublyLinkedList:
         else:
             node.prev().append(node.next())
             del node
+
+
+    def delete_from_front(self) -> Any:
+        """
+        Delete the first node in the list and return the data it held.
+
+        Parameters:
+            None
+
+        Returns:
+            The data held by the node that was deleted from the front.
+
+        Error Handling:
+            If the list is empty, raises a ValueError.
+        """
+
+        if self.is_empty():
+            raise ValueError('Delete on an empty list.')
+        data = self._head.data()
+        self._head = self._head.next()
+        if self._head is None:
+            self._tail = None
+        else:
+            self._head.prepend(None)
+        return data
+
+
+    def delete_from_back(self) -> Any:
+        """
+        Delete the last node in the list and return the data it held.
+
+        Parameters:
+            None
+
+        Returns:
+            The data held by the node that was deleted from the back of the list.
+
+        Error Handling:
+            If the list is empty, raises a ValueError.
+        """
+
+        if self.is_empty():
+            raise ValueError('Delete on an empty list.')
+        data = self._tail.data()
+        self._tail = self._tail.prev()
+        if self._tail is None:
+            self._head = None
+        else:
+            self._tail.append(None)
+        return data

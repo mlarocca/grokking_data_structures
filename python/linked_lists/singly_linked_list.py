@@ -224,6 +224,20 @@ class SinglyLinkedList:
         return size
 
 
+    def is_empty(self) -> bool:
+        """
+        Check if the linked list is empty.
+
+        Parameters:
+            None
+
+        Returns:
+            bool: True if the linked list is empty, False otherwise.
+        """
+
+        return self._head is None
+
+
     def insert_in_front(self, data: Any) -> None:
         """
         Add a node to the beginning of the list.
@@ -322,3 +336,24 @@ class SinglyLinkedList:
             current = current.next()
         # If it gets here, it hasn't found the target
         raise ValueError(f'No element with value {target} was found in the list.')
+
+
+    def delete_from_front(self) -> Any:
+        """
+        Delete the first node in the list and return the data it held.
+
+        Parameters:
+            None
+
+        Returns:
+            The data held by the node that was deleted from the front.
+
+        Error Handling:
+            If the list is empty, raises a ValueError.
+        """
+
+        if self.is_empty():
+            raise ValueError('Delete on an empty list.')
+        data = self._head.data()
+        self._head = self._head.next()
+        return data

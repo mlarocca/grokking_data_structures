@@ -78,10 +78,21 @@ python -m unittest tests/test_doubly_linked_list.py
 # **Bags**
 ## | [Chapter 7](https://livebook.manning.com/book/...) | [Python](https://github.com/mlarocca/gda/blob/main/python/bags/bag.py) |
 
-![Binary search](./readme/thumbs/CH07_UN07_La_Rocca3.md.jpg)
+![Bag data structure](./readme/thumbs/CH07_UN07_La_Rocca3.md.jpg)
 
 ### Run Tests: 
 From ./python folder, run
 ```console
 python -m unittest tests/test_bag.py
+```
+
+# **Stacks**
+## | [Chapter 8](https://livebook.manning.com/book/...) | [Python](https://github.com/mlarocca/gda/blob/main/python/stacks/stack.py) |
+
+![Stack](./readme/thumbs/CH08_UN03_La_Rocca3.md.jpg)
+
+### Run Tests: 
+From ./python folder, run
+```console
+python -m unittest tests/test_stack.py
 ```

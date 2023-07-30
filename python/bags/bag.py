@@ -12,19 +12,6 @@ class Bag():
         self._data = SinglyLinkedList()
 
 
-    def insert(self, value: Any) -> None:
-        """
-        Insert a new value into the bag.
-
-        Parameters:
-            value (Any): The value to insert into the bag.
-
-        Returns:
-            None
-        """
-        self._data.insert_in_front(value)
-
-
     def __iter__(self):
         """
         Iterate over the values in the bag.
@@ -76,3 +63,30 @@ class Bag():
             str: The string representation of the bag.
         """
         return f'Bag({",".join(map(str, self))})'
+
+
+    def is_empty(self) -> bool:
+        """
+        Check if the bag is empty.
+
+        Parameters:
+            None
+
+        Returns:
+            bool: True if the bag is empty, False otherwise.
+        """
+
+        return self._data.is_empty()
+
+
+    def insert(self, value: Any) -> None:
+        """
+        Insert a new value into the bag.
+
+        Parameters:
+            value (Any): The value to insert into the bag.
+
+        Returns:
+            None
+        """
+        self._data.insert_in_front(value)
