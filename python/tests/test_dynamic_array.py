@@ -27,7 +27,7 @@ class TestDynamicArray(unittest.TestCase):
         """Test initializing Array with invalid size"""
         with self.assertRaises(ValueError):
             DynamicArray(-1)
-            
+
     def test_init_invalid_typecode(self):
         """Test initializing Array with invalid typecode"""
         with self.assertRaises(ValueError):
@@ -42,7 +42,7 @@ class TestDynamicArray(unittest.TestCase):
         self.assertEqual(len(array), 0)
         array.insert(1)
         self.assertEqual(len(array), 1)
-    
+
 
     # __get_item__
 
@@ -67,7 +67,7 @@ class TestDynamicArray(unittest.TestCase):
         array.insert(431)
         with self.assertRaises(IndexError):
             array[-1]                    
-    
+
     # __repr__
 
     def test_repr(self):
@@ -79,7 +79,7 @@ class TestDynamicArray(unittest.TestCase):
 
 
     # __iter__
-    
+
     def test_iter(self):
         """Test iteration over values in the array."""
         array = DynamicArray(8, 'i')
@@ -91,7 +91,7 @@ class TestDynamicArray(unittest.TestCase):
             iterated_values.append(value)
         expected_values = [1, 2, 3]
         self.assertEqual(iterated_values, expected_values)
-    
+
     def test_iter_empty(self):
         """Test that iteration over an empty array raises StopIteration."""
         array = DynamicArray(3, 'i')
@@ -100,7 +100,7 @@ class TestDynamicArray(unittest.TestCase):
 
 
     # insert
-    
+
     def test_insert_full(self):
         """Test that insert resizes the array correctly"""
         array = DynamicArray(typecode = 'i')
@@ -113,7 +113,7 @@ class TestDynamicArray(unittest.TestCase):
         self.assertEqual(3, len(array))
         self.assertEqual(array._capacity, 4)
         self.assertEqual([v for v in array], [1,2,3])
-    
+
         array = DynamicArray(3, 'i')
         array.insert(1)
         self.assertEqual(array._capacity, 3)
@@ -128,7 +128,7 @@ class TestDynamicArray(unittest.TestCase):
         self.assertEqual(array._capacity, 6)
         self.assertEqual([v for v in array], [1,2,3,4])
 
-    # search        
+    # search
 
     def test_find_found(self):
         """Test searching for a value that is in the array."""
@@ -143,7 +143,7 @@ class TestDynamicArray(unittest.TestCase):
         array.insert(21.3)
         array.insert(3.1415)
         self.assertEqual(array.find(3.1415), 1)
-    
+
     def test_find_not_found(self):
         """Test searching for a value that is not in the array."""
         array = DynamicArray(5, 'i')
@@ -151,7 +151,7 @@ class TestDynamicArray(unittest.TestCase):
         array.insert(1)
         array.insert(2)
         self.assertEqual(array.find(4), None)
-    
+
     def test_find_empty(self):
         """Test searching an empty array."""
         array = DynamicArray(2, 'i')
@@ -180,6 +180,18 @@ class TestDynamicArray(unittest.TestCase):
         self.assertEqual(array.find(-2), None)
         array.delete(-1)
         self.assertEqual(array.find(-1), None)
+
+    # is_empty
+
+    def test_is_empty(self):
+        """Test the is_empty method."""
+        array = DynamicArray(2, 'i')
+        self.assertTrue(array.is_empty())
+        array.insert(1)
+        self.assertFalse(array.is_empty())
+        array.insert(3)
+        array.insert(2)
+        self.assertFalse(array.is_empty())
 
     # delete
 
@@ -232,7 +244,7 @@ class TestDynamicArray(unittest.TestCase):
 
         array.delete(2)
         self.assertEqual(len(array), 3)
-        
+
         array.delete(2)
         array.delete(0)
         self.assertEqual(len(array), 1)
@@ -249,7 +261,7 @@ class TestDynamicArray(unittest.TestCase):
         array.insert(2)
         with self.assertRaises(ValueError):
             array.delete(4)
-    
+
     def test_delete_empty(self):
         """Test deleting from an empty array."""
         array = DynamicArray(5, 'i')
@@ -326,6 +338,3 @@ class TestDynamicArray(unittest.TestCase):
         array.delete(3)
         self.assertEqual(len(array), 0)
         self.assertEqual(array._capacity, 1)
-
-if __name__ == '__main__':
-    unittest.main()

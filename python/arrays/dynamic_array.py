@@ -35,7 +35,7 @@ class DynamicArray:
             initial_capacity (int, optional): The maximum number of elements the array can hold.
             typecode (str, optional): The typecode of the array. Defaults to 'l' for int.
 
-       '''	
+       '''
     def __init__(self, initial_capacity: int = 1, typecode: str = 'l') -> None:
         self._array = core.Array(initial_capacity, typecode)
         self._capacity = initial_capacity
@@ -55,8 +55,8 @@ class DynamicArray:
         '''
 
         return self._size
-    
-    
+
+
     def __getitem__(self, index) -> Union[int, float]:
         '''
         Get the value at the given index.
@@ -66,13 +66,13 @@ class DynamicArray:
 
         Returns:
             Union[int, float]: The value at the given index.
-        '''  
-        
+        '''
+
         if index >= self._size:
-            raise(IndexError(f'Index out of bound: {index}'))
+            raise IndexError(f'Index out of bound: {index}')
         return self._array[index]
-    
-    
+
+
     def __repr__(self) -> str:
         '''
         Return the string representation of the array.
@@ -85,7 +85,7 @@ class DynamicArray:
         '''
 
         return repr(self._array._array[:self._size])    
-    
+
 
     def __iter__(self):
         '''
@@ -97,7 +97,7 @@ class DynamicArray:
         Functionality:
             Iterates over the values in the unsorted array. The iteration starts at index 0 and
             goes on until it reaches the last element in the array.
-        '''  
+        '''
 
         for i in range(self._size):
             yield self._array[i]
@@ -127,7 +127,7 @@ class DynamicArray:
         Functionality:
             Creates a new array with double the capacity of the old one.
             Copies all elements from the old array into the new larger array.
-        '''     
+        '''
 
         assert(self._capacity  == self._size)   # Invariant: this is called only when capacity == size
         old_array = self._array
@@ -151,7 +151,7 @@ class DynamicArray:
 
             Creates a new array with half the capacity of the old one.
             Copies all elements from the old array into the new smaller array.
-        '''   
+        '''
 
         assert(self._capacity > 1 and self._size <= self._capacity/4) # Invariant: this is called only when capacity > 1 and size <= capacity/4
         old_array = self._array
@@ -159,11 +159,11 @@ class DynamicArray:
         self._capacity //= 2
         for i in range(self._size):
             self._array[i] = old_array[i]
-        
+
         assert(self._array._size == self._capacity) # Invariant: the size of the new static array should be equal to the new capacity
 
 
-    def isEmpty(self):
+    def is_empty(self):
         '''
         Check if the array is empty.
 
@@ -197,7 +197,7 @@ class DynamicArray:
 
         if self._is_full():
             self._double_size()
-        
+
         # By now, we are sure that self._size < len(self._array)
         self._array[self._size] = value
         self._size += 1
@@ -215,7 +215,8 @@ class DynamicArray:
 
         Functionality:
             Performs a linear search over the values in the sorted array.
-            Returns the index of the leftmost occurrence of the target value, if found. Otherwise returns None.
+            Returns the index of the leftmost occurrence of the target value, if found.
+            Otherwise returns None.
         '''
 
         for i in range(self._size):
@@ -223,7 +224,7 @@ class DynamicArray:
                 return i
         # Element not found, reached the end of the array
         return None
-    
+
 
     def delete(self, target: Union[int, float]) -> None:
         '''
@@ -238,13 +239,13 @@ class DynamicArray:
         Functionality:
             Finds the leftmost index of the target value using the find method.
             If the target is not found, raises a ValueError.
-            Otherwise, deletes the target value by shifting all values after it to the left, to keep the remaining
-            elements in the order they were inserted.
+            Otherwise, deletes the target value by shifting all values after it to the left,
+            to keep the remaining elements in the order they were inserted.
         '''
 
         index = self.find(target)
         if index is None:
-            raise(ValueError(f'Unable to delete element {target}: the entry is not in the array'))
+            raise ValueError(f'Unable to delete element {target}: the entry is not in the array')
 
         # Must shift all the elements after the position of the target
         for i in range(index, self._size - 1):

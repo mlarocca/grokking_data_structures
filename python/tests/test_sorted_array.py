@@ -3,7 +3,7 @@ from arrays.sorted_array import SortedArray
 
 class TestSortedArray(unittest.TestCase):
     # __init__
-    
+
     def test_init(self):
         """Test initialization of SortedArray."""
         array = SortedArray(5)
@@ -16,7 +16,7 @@ class TestSortedArray(unittest.TestCase):
         """Test initializing Array with invalid size"""
         with self.assertRaises(ValueError):
             SortedArray(-1)
-            
+
     def test_init_invalid_typecode(self):
         """Test initializing Array with invalid typecode"""
         with self.assertRaises(ValueError):
@@ -31,7 +31,7 @@ class TestSortedArray(unittest.TestCase):
         self.assertEqual(len(array), 0)
         array.insert(1)
         self.assertEqual(len(array), 1)
-    
+
 
     # __get_item__
 
@@ -56,7 +56,7 @@ class TestSortedArray(unittest.TestCase):
         array.insert(431)
         with self.assertRaises(IndexError):
             array[-1]                    
-    
+
     # __repr__
 
     def test_repr(self):
@@ -68,7 +68,7 @@ class TestSortedArray(unittest.TestCase):
 
 
     # __iter__
-    
+
     def test_iter(self):
         """Test iteration over values in the array."""
         array = SortedArray(8, 'i')
@@ -80,7 +80,7 @@ class TestSortedArray(unittest.TestCase):
             iterated_values.append(value)
         expected_values = [1, 2, 3]
         self.assertEqual(iterated_values, expected_values)
-    
+
     def test_iter_empty(self):
         """Test that iteration over an empty array raises StopIteration."""
         array = SortedArray(3, 'i')
@@ -101,7 +101,7 @@ class TestSortedArray(unittest.TestCase):
 
 
     # insert
-    
+
     def test_insert_full(self):
         """Test that insert raises an error if the array is full."""
         array = SortedArray(2, 'i')
@@ -109,7 +109,7 @@ class TestSortedArray(unittest.TestCase):
         array.insert(2)
         with self.assertRaises(ValueError):
             array.insert(3)
-    
+
     def test_insert_sorted(self):
         """Test that insert places values in the correct sorted position."""
         array = SortedArray(6, 'i')
@@ -125,7 +125,7 @@ class TestSortedArray(unittest.TestCase):
         self.assertEqual(array[0], 1)
         self.assertEqual(array[1], 2)
         self.assertEqual(array[2], 3)
-    
+
     def test_insert_first(self):
         """Test that insert places the first value at index 0."""
         array = SortedArray(5, 'i')
@@ -136,7 +136,7 @@ class TestSortedArray(unittest.TestCase):
         self.assertEqual(len(array), 2)
 
 
-    # search (naive)        
+    # search (linear)
 
     def test_linear_search_found(self):
         """Test searching for a value that is in the array."""
@@ -151,7 +151,7 @@ class TestSortedArray(unittest.TestCase):
         array.insert(21.3)
         array.insert(3.1415)
         self.assertEqual(array.linear_search(3.1415), 0)
-    
+
     def test_linear_search_not_found(self):
         """Test searching for a value that is not in the array."""
         array = SortedArray(5, 'i')
@@ -159,7 +159,7 @@ class TestSortedArray(unittest.TestCase):
         array.insert(1)
         array.insert(2)
         self.assertEqual(array.linear_search(4), None)
-    
+
     def test_linear_search_empty(self):
         """Test searching an empty array."""
         array = SortedArray(2, 'i')
@@ -200,7 +200,7 @@ class TestSortedArray(unittest.TestCase):
         self.assertEqual(array.binary_search(-1), 1)
         self.assertEqual(array.binary_search(-2), 0)
         self.assertEqual(array.binary_search(23), 5)
-    
+
     def test_find_not_found(self):
         """Test finding a value that is not in the array."""
         array = SortedArray(5, 'i')
@@ -227,7 +227,7 @@ class TestSortedArray(unittest.TestCase):
         self.assertEqual(array.binary_search(0.0), None)
         array.insert(0)
         self.assertEqual(array.binary_search(0), 3)        
-    
+
     def test_find_empty(self):
         """Test finding a value in an empty array."""
         array = SortedArray(5, 'i')
@@ -286,7 +286,7 @@ class TestSortedArray(unittest.TestCase):
 
         array.delete(2)
         self.assertEqual(len(array), 3)
-        
+
         array.delete(2)
         array.delete(0)
         self.assertEqual(len(array), 1)
@@ -303,13 +303,9 @@ class TestSortedArray(unittest.TestCase):
         array.insert(2)
         with self.assertRaises(ValueError):
             array.delete(4)
-    
+
     def test_delete_empty(self):
         """Test deleting from an empty array."""
         array = SortedArray(5, 'i')
         with self.assertRaises(ValueError):
             array.delete(1)
-
-
-if __name__ == '__main__':
-    unittest.main()

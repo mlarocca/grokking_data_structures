@@ -1,6 +1,6 @@
 import unittest
 from arrays.core import Array
-from arrays.unsorted_array import insert_in_unsorted_array, delete_from_unsorted_array, find_in_unsorted_array
+from arrays.unsorted_array import insert_in_unsorted_array, delete_from_unsorted_array, find_in_unsorted_array, traverse_unsorted_array
 
 class TestArray(unittest.TestCase):
     # __insert__
@@ -11,7 +11,7 @@ class TestArray(unittest.TestCase):
         current_size = insert_in_unsorted_array(1, arr, 0)
         self.assertEqual(current_size, 1)
         self.assertEqual(arr[0], 1)
-        
+
     def test_insert_invalid(self):
         """Test inserting into a full array"""
         arr = Array(1)
@@ -41,14 +41,14 @@ class TestArray(unittest.TestCase):
         self.assertEqual(arr[0], 4)
         current_size = delete_from_unsorted_array(0, arr, current_size)
         self.assertEqual(current_size, 0)
-        
+
     def test_delete_invalid_empty(self):
         """Test deleting from an empty array"""
         arr = Array(3)
         current_size = 0
         with self.assertRaises(ValueError):
             delete_from_unsorted_array(0, arr, current_size)
-            
+
     def test_delete_invalid_index(self):
         """Test deleting with an invalid index"""
         arr = Array(5)
@@ -94,5 +94,12 @@ class TestArray(unittest.TestCase):
         with self.assertRaises(ValueError):
             find_in_unsorted_array(2, array, size=-1)
 
-if __name__ == '__main__':
-    unittest.main()
+    # traverse
+
+    def test_traverses_entire_array(self):
+        result = []
+        def test_callback(i: int):
+            result.append(i + 1 )
+        array = [1, 2, 3, 4, 5]
+        traverse_unsorted_array(array, len(array), test_callback)
+        self.assertEqual(result, [2, 3, 4, 5, 6])

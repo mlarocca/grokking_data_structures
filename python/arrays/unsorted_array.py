@@ -74,10 +74,10 @@ def traverse_unsorted_array(array, size, callback):
     '''
 
     for index in range(size):
-        callback(array[index]) 
+        callback(array[index])
 
 
-if __name__ == '__main__':
+if __name__ == '__main__': # pragma: no cover
     array = Array(3)
     print(array)
     size = 0
