@@ -1,14 +1,17 @@
 import unittest
 from stacks.stack import Stack
+from stacks.stack_dynamic_array import Stack as StackWithArray
 
-class TestStack(unittest.TestCase):
+class TestStackTemplate():
+    def new_stack(self):
+        raise NotImplementedError()
 
     def test_init(self):
-        stack = Stack()
+        stack = self.new_stack()
         self.assertEqual(len(stack), 0)
 
     def test_push_pop(self):
-        stack = Stack()
+        stack = self.new_stack()
         self.assertEqual(len(stack), 0)
 
         # Pop from empty stack
@@ -36,7 +39,7 @@ class TestStack(unittest.TestCase):
 
 
     def test_peek(self):
-        stack = Stack()
+        stack = self.new_stack()
         self.assertEqual(len(stack), 0)
 
         # Peek at empty stack
@@ -57,7 +60,7 @@ class TestStack(unittest.TestCase):
 
 
     def test_len(self):
-        stack = Stack()
+        stack = self.new_stack()
         self.assertEqual(len(stack), 0)
 
         stack.push(1)
@@ -71,7 +74,7 @@ class TestStack(unittest.TestCase):
 
 
     def test_repr(self):
-        stack = Stack()
+        stack = self.new_stack()
         self.assertEqual(repr(stack), 'Stack()')
 
         stack.push(1)
@@ -84,7 +87,7 @@ class TestStack(unittest.TestCase):
 
 
     def test_str(self):
-        stack = Stack()
+        stack = self.new_stack()
         self.assertEqual(str(stack), '')
 
         stack.push('a')
@@ -97,7 +100,7 @@ class TestStack(unittest.TestCase):
 
 
     def test_is_empty(self):
-        stack = Stack()
+        stack = self.new_stack()
 
         # Check empty stack
         self.assertTrue(stack.is_empty())
@@ -105,3 +108,41 @@ class TestStack(unittest.TestCase):
         # Check non-empty stack
         stack.push(1)
         self.assertFalse(stack.is_empty())
+
+
+class TestStack(TestStackTemplate, unittest.TestCase):
+    """Tests a stack implemented with linked lists."""
+    def new_stack(self):
+        return Stack()
+
+
+class TestStackArray(TestStackTemplate, unittest.TestCase):
+    """Runs the tests for a stack implemented with arrays (Python lists)."""
+    def new_stack(self):
+        return StackWithArray()
+
+    # Additional tests specific to stack implemented with arrays
+    def test_repr(self):
+        stack = self.new_stack()
+        self.assertEqual(repr(stack), 'Stack([])')
+
+        stack.push(1)
+        self.assertEqual(repr(stack), 'Stack([1])')
+
+        stack.push(2)
+        stack.push(3.14)
+        # When more than one element is in the stack, we can't put constraints on the order
+        self.assertEqual(repr(stack), 'Stack([3.14, 2, 1])')
+
+
+    def test_str(self):
+        stack = self.new_stack()
+        self.assertEqual(str(stack), '[]')
+
+        stack.push('a')
+        self.assertEqual(str(stack), '[\'a\']')
+
+        stack.push('b')
+        stack.push('c')
+        # When more than one element is in the stack, we can't put constraints on the order
+        self.assertEqual(str(stack), '[\'c\', \'b\', \'a\']')
