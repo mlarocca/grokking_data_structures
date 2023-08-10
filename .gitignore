@@ -3,3 +3,6 @@
 # Coverage
 **/.coverage
 **/htmlcov
+
+# Profiling
+profiling/results
