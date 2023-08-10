@@ -125,6 +125,35 @@ class TestSinglyLinkedList(unittest.TestCase):
         self.assertIsNone(linked_list._head.next().next().next())
 
 
+    def test_get_valid_index(self):
+        linked_list = SinglyLinkedList()
+        linked_list.insert_in_front(1)
+        linked_list.insert_in_front(2)
+        linked_list.insert_in_front(3)
+
+        self.assertEqual(linked_list.get(0), 3)
+        self.assertEqual(linked_list.get(1), 2)
+        self.assertEqual(linked_list.get(2), 1)
+
+    def test_get_invalid_index(self):
+        linked_list = SinglyLinkedList()
+
+        with self.assertRaises(IndexError):
+            linked_list.get(-1)
+
+        with self.assertRaises(IndexError):
+            linked_list.get(0) # index out of bounds
+
+    def test_get_returns_deep_copy(self):
+        linked_list = SinglyLinkedList()
+        linked_list.insert_in_front([['a', 'b'], 1, 2])
+
+        retrieved = linked_list.get(0)
+        retrieved.append(3)
+        retrieved[0].append('c')
+        self.assertEqual(linked_list.get(0), [['a', 'b'], 1, 2])
+
+
     def test_search(self):
         linked_list = SinglyLinkedList()
 

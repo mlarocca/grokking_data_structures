@@ -1,5 +1,6 @@
 """Module providing an implementation for doubly-linked list."""
 from __future__ import annotations
+import copy
 from typing import Any, Callable, List, Optional
 
 class DoublyLinkedList:
@@ -341,6 +342,32 @@ class DoublyLinkedList:
             current = current.next()
         return result
 
+
+    def get(self, index):
+        """
+        Get the data at the given index.
+
+        Parameters:
+            index (int): The index of the element to retrieve, starting from the head of the list.
+        
+        Returns:
+            Any: A deep copy of the data at the given index if found.
+        
+        Error Handling:
+            Raising an IndexError if index is invalid.
+        """
+        if index < 0:
+            raise IndexError("Index must be non-negative")
+        current = self._head
+        current_index = 0
+        while current_index < index and current is not None:
+            current = current.next()
+            current_index += 1
+        if current is None:
+            raise IndexError("Index out of bounds")
+        # Here we know that we are at the right index
+        return copy.deepcopy(current.data())
+    
 
     def _search(self, target: Any) -> Optional[DoublyLinkedList.Node]:
         """
