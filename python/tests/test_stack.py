@@ -3,7 +3,7 @@ from stacks.stack import Stack
 from stacks.stack_dynamic_array import Stack as StackWithArray
 
 class TestStackTemplate():
-    def new_stack(self):
+    def new_stack(self): # pragma: no cover
         raise NotImplementedError()
 
     def test_init(self):

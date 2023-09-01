@@ -64,7 +64,7 @@ class TestSortedArray(unittest.TestCase):
         array = SortedArray(5, 'i')
         array.insert(1)
         array.insert(2)
-        self.assertEqual(repr(array), "array('i', [1, 2])")
+        self.assertEqual(repr(array), "SortedArray(array('i', [1, 2]))")
 
 
     # __iter__

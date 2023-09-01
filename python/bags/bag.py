@@ -3,7 +3,7 @@
 from typing import Any
 from linked_lists.singly_linked_list import SinglyLinkedList
 
-class Bag():
+class Bag:
     """ A class modeling the bag container.
     """
     def __init__(self) -> None:

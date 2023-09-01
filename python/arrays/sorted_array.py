@@ -49,8 +49,8 @@ class SortedArray:
         '''
 
         return self._size
-    
-    
+
+
     def __getitem__(self, index) -> Union[int, float]:
         '''
         Get the value at the given index.
@@ -60,13 +60,13 @@ class SortedArray:
 
         Returns:
             Union[int, float]: The value at the given index.
-        '''    
+        '''
 
-        if index >= self._size:
-            raise(IndexError(f'Index out of bound: {index}'))
+        if index < 0 or index >= self._size:
+            raise IndexError(f'Index out of bound: {index}')
         return self._array[index]
-    
-    
+
+
     def __repr__(self) -> str:
         '''
         Return the string representation of the array.
@@ -78,7 +78,7 @@ class SortedArray:
             str: The string representation of the array.
         '''
 
-        return repr(self._array._array[:self._size])    
+        return f'SortedArray({repr(self._array._array[:self._size])})'
     
 
     def __iter__(self):
@@ -92,7 +92,7 @@ class SortedArray:
             Iterates over the values in the sorted array. The iteration starts at index 0 and
             goes on until it reaches the end of the array (not the full maximum capacity of the array,
             just the last stored elements).
-        '''  
+        '''
 
         for i in range(self._size):
             yield self._array[i]
@@ -108,11 +108,11 @@ class SortedArray:
         Returns:
             int: The maximum size of the array.
 
-        '''  
+        '''
 
         return self._max_size
-    
-    
+
+
     def insert(self, value: Union[int, float]) -> None:
         '''
         Insert a new value into the sorted array.
@@ -223,7 +223,7 @@ class SortedArray:
 
         index = self.binary_search(target)
         if index is None:
-            raise(ValueError(f'Unable to delete element {target}: the entry is not in the array'))
+            raise ValueError(f'Unable to delete element {target}: the entry is not in the array')
 
         # Must shift all the elements after the position of the target
         for i in range(index, self._size - 1):
