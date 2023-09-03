@@ -105,7 +105,7 @@ class UnsortedArray:
         '''
 
         if self._size >= len(self._array):
-            raise(ValueError('The array is already full'))
+            raise ValueError('The array is already full')
         else:
             self._array[self._size] = new_entry
             self._size += 1
@@ -120,9 +120,9 @@ class UnsortedArray:
         '''
 
         if self._size == 0:
-            raise(ValueError('Delete from an empty array'))
+            raise ValueError('Delete from an empty array') 
         elif index < 0 or index >= self._size:
-            raise(ValueError(f'Index {index} out of range.'))
+            raise ValueError(f'Index {index} out of range.') 
         else:
             self._array[index] = self._array[self._size-1]
             self._size -= 1
