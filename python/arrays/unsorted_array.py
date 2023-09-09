@@ -145,7 +145,7 @@ class UnsortedArray:
         # Couldn't find the target
         return None
 
-    def traverse_unsorted_array(self, callback):
+    def traverse(self, callback):
         '''
         Traverse an unsorted array and call a callback function on each element.
 

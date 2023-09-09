@@ -129,5 +129,5 @@ class TestArray(unittest.TestCase):
         array.insert(3)
         array.insert(4)
         array.insert(5)
-        array.traverse_unsorted_array(test_callback)
+        array.traverse(test_callback)
         self.assertEqual(result, [2, 3, 4, 5, 6])
