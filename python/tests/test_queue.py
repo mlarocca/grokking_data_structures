@@ -71,11 +71,31 @@ class TestQueue(TestQueueTemplate, unittest.TestCase):
     
     # Tests specific to the array implementation 
     def test_init_with_invalid_size(self):
-        with self.assertRaises(ValueError):
-            Queue(0)
-    
+        # Negative
         with self.assertRaises(ValueError):
             Queue(-1)
+        # Null
+        with self.assertRaises(ValueError):
+            Queue(0)
+        # Just one element
+        with self.assertRaises(ValueError):
+            Queue(1)
+
+    def test_init_with_valid_size(self):
+        queue = self.new_queue(2)
+        queue.enqueue(1)
+        queue.enqueue(2)
+        with self.assertRaises(ValueError):
+            queue.enqueue(3)
+        self.assertEqual(queue.dequeue(), 1)
+        queue.enqueue(3)
+        self.assertEqual(queue.dequeue(), 2)
+        self.assertEqual(queue.dequeue(), 3)
+        with self.assertRaises(ValueError):
+            queue.dequeue()
+        queue.enqueue(4)
+        self.assertEqual(len(queue), 1)
+        self.assertEqual(queue.dequeue(), 4)
 
     def test_enqueue_to_a_full_queue(self):
         queue = self.new_queue(4)

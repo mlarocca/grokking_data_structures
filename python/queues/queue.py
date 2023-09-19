@@ -10,8 +10,8 @@ class Queue:
     def __init__(self, max_size):
         """ Creates a static array with size `max_size`.
         """
-        if max_size <= 0:
-            raise ValueError(f'Invalid size for a queue (must be positive): {max_size}')
+        if max_size <= 1:
+            raise ValueError(f'Invalid size for a queue (must have at least two elements): {max_size}')
         self._data = [None] * max_size
         self._max_size = max_size
         self._front = 0
@@ -44,6 +44,7 @@ class Queue:
         while front < self._rear:
             yield self._data[front]
             front += 1
+
 
     def __str__(self):
         """
