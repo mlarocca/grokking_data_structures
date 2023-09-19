@@ -1,4 +1,4 @@
-"""Module providing an implementation for stack, using doubly-linked lists to store the elements."""
+"""Module providing an implementation for queue, using doubly-linked lists to store the elements."""
 
 from typing import Any
 from linked_lists.doubly_linked_list import DoublyLinkedList 
@@ -92,5 +92,5 @@ class Queue:
             ValueError: If the queue is empty.
         """
         if self.is_empty():
-            raise ValueError("Cannot pop from an empty queue")
+            raise ValueError("Cannot dequeue from an empty queue")
         return self._data.delete_from_front()

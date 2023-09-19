@@ -23,7 +23,7 @@ class TestQueueTemplate():
         self.assertEqual(queue.dequeue(), 'A')
         self.assertEqual(len(queue), 0)
 
-        # Pop from empty queue
+        # Dequeue from empty queue
         with self.assertRaises(ValueError):
             queue.dequeue()
 

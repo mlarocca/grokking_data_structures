@@ -1,4 +1,4 @@
-"""Module providing an implementation for stack, using doubly-linked lists to store the elements."""
+"""Module providing an implementation for queue, using a statically-sized array to store the elements."""
 
 from typing import Any
 from linked_lists.doubly_linked_list import DoublyLinkedList 
