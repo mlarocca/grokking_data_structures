@@ -4,7 +4,7 @@ import copy
 from typing import Any
 from linked_lists.singly_linked_list import SinglyLinkedList
 
-class Stack():
+class Stack:
     """ A class modeling the stack container.
     """
     def __init__(self) -> None:

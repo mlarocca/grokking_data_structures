@@ -131,7 +131,6 @@ class TestStackArray(TestStackTemplate, unittest.TestCase):
 
         stack.push(2)
         stack.push(3.14)
-        # When more than one element is in the stack, we can't put constraints on the order
         self.assertEqual(repr(stack), 'Stack([3.14, 2, 1])')
 
 
@@ -144,5 +143,4 @@ class TestStackArray(TestStackTemplate, unittest.TestCase):
 
         stack.push('b')
         stack.push('c')
-        # When more than one element is in the stack, we can't put constraints on the order
         self.assertEqual(str(stack), '[\'c\', \'b\', \'a\']')

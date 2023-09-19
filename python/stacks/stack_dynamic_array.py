@@ -3,7 +3,7 @@
 import copy
 from typing import Any
 
-class Stack():
+class Stack:
     """ A class modeling the stack container.
     """
     def __init__(self) -> None:
