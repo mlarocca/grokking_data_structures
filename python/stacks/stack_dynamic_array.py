@@ -25,6 +25,14 @@ class Stack:
         return len(self._data)
 
 
+    def __iter__(self):
+        """ Iterates on the elements of a stack.
+            Warning: by doing so, the queue will be emptied.
+        """
+        while not self.is_empty():
+            yield self.pop()
+
+
     def __str__(self):
         """
         Return the string representation of the stack.

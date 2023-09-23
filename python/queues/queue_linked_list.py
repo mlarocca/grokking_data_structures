@@ -12,7 +12,7 @@ class Queue:
         """
         self._data = DoublyLinkedList()
 
-    
+
     def __len__(self):
         """
         Return the size of the queue.
@@ -24,7 +24,16 @@ class Queue:
             int: The number of values stored in the queue.
         """
         return len(self._data)
-        
+
+
+
+    def __iter__(self):
+        """ Iterates on the elements of a queue.
+            Warning: by doing so, the queue will be emptied.
+        """
+        while not self.is_empty():
+            yield self.dequeue()
+
 
     def __str__(self):
         """

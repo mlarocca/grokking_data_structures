@@ -63,13 +63,29 @@ class TestQueueTemplate():
         self.assertFalse(queue.is_empty())
 
 
+    def test_iter(self):
+        queue = self.new_queue()
+        queue.enqueue(1)
+        queue.enqueue(2)
+        queue.enqueue(3)
+        queue.dequeue()
+        queue.enqueue(4)
+        queue.enqueue(5)
+        queue.dequeue()
+        queue.enqueue(6)
+
+        iterated = [x for x in queue]
+        self.assertEqual(iterated, [3, 4, 5, 6])
+        self.assertTrue(queue.is_empty())
+
 
 class TestQueue(TestQueueTemplate, unittest.TestCase):
     """Tests a circular queue implemented with static arrays."""
     def new_queue(self, size=10):
         return Queue(size)
-    
-    # Tests specific to the array implementation 
+
+
+    # Tests specific to the array implementation
     def test_init_with_invalid_size(self):
         # Negative
         with self.assertRaises(ValueError):
@@ -80,6 +96,7 @@ class TestQueue(TestQueueTemplate, unittest.TestCase):
         # Just one element
         with self.assertRaises(ValueError):
             Queue(1)
+
 
     def test_init_with_valid_size(self):
         queue = self.new_queue(2)
@@ -97,6 +114,7 @@ class TestQueue(TestQueueTemplate, unittest.TestCase):
         self.assertEqual(len(queue), 1)
         self.assertEqual(queue.dequeue(), 4)
 
+
     def test_enqueue_to_a_full_queue(self):
         queue = self.new_queue(4)
 
@@ -108,6 +126,7 @@ class TestQueue(TestQueueTemplate, unittest.TestCase):
 
         with self.assertRaises(ValueError):
             queue.enqueue('one too many')
+
 
     def test_repr(self):
         queue = self.new_queue()
@@ -123,7 +142,7 @@ class TestQueue(TestQueueTemplate, unittest.TestCase):
 
 
     def test_str(self):
-        queue = self.new_queue()
+        queue = self.new_queue(5)
         self.assertEqual(str(queue), '[]')
 
         queue.enqueue('a')
@@ -131,8 +150,16 @@ class TestQueue(TestQueueTemplate, unittest.TestCase):
 
         queue.enqueue('b')
         queue.enqueue('c')
-        
+
         self.assertEqual(str(queue), '[\'a\', \'b\', \'c\']')
+
+        queue.dequeue()
+        queue.enqueue('d')
+        queue.enqueue('e')
+        queue.dequeue()
+        queue.enqueue('f')
+
+        self.assertEqual(str(queue), '[\'c\', \'d\', \'e\', \'f\']')
 
 
 class TestQueueLinkedList(TestQueueTemplate, unittest.TestCase):
@@ -162,5 +189,5 @@ class TestQueueLinkedList(TestQueueTemplate, unittest.TestCase):
 
         queue.enqueue('b')
         queue.enqueue('c')
-        
+
         self.assertEqual(str(queue), 'a<->b<->c')

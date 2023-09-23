@@ -110,6 +110,22 @@ class TestStackTemplate():
         self.assertFalse(stack.is_empty())
 
 
+    def test_iter(self):
+        stack = self.new_stack()
+        stack.push(1)
+        stack.push(2)
+        stack.push(3)
+        stack.pop()
+        stack.push(4)
+        stack.push(5)
+        stack.pop()
+        stack.push(6)
+
+        iterated = [x for x in stack]
+        self.assertEqual(iterated, [6, 4, 2, 1])
+        self.assertTrue(stack.is_empty())
+
+
 class TestStack(TestStackTemplate, unittest.TestCase):
     """Tests a stack implemented with linked lists."""
     def new_stack(self):

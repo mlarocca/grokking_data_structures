@@ -18,7 +18,7 @@ class Queue:
         self._rear = 0
         self._size = 0
 
-    
+
     def __len__(self):
         """
         Return the size of the queue.
@@ -30,20 +30,14 @@ class Queue:
             int: The number of values stored in the queue.
         """
         return self._size
-        
+
 
     def __iter__(self):
-        if self.is_empty():
-            return
-        front = self._front
-        if front > self._rear:
-            while front < self._max_size:
-                yield self._data[front]
-                front += 1
-            front = 0
-        while front < self._rear:
-            yield self._data[front]
-            front += 1
+        """ Iterates on the elements of a queue.
+            Warning: by doing so, the queue will be emptied.
+        """
+        while not self.is_empty():
+            yield self.dequeue()
 
 
     def __str__(self):
@@ -56,7 +50,21 @@ class Queue:
         Returns:
             str: The string representation of the queue.
         """
-        return str([x for x in self])
+        def iterate():
+            # We don't normally allow iterating on the elements of a queue without dequeueing them
+            if self.is_empty():
+                return
+            front = self._front
+            if front > self._rear:
+                while front < self._max_size:
+                    yield self._data[front]
+                    front += 1
+                front = 0
+            while front < self._rear:
+                yield self._data[front]
+                front += 1
+
+        return str([x for x in iterate()])
 
 
     def __repr__(self):
@@ -69,7 +77,7 @@ class Queue:
         Returns:
             str: The string representation of the queue.
         """
-        return f'Queue({str([x for x in self])})'
+        return f'Queue({str(self)})'
 
 
     def is_empty(self) -> bool:
@@ -82,7 +90,6 @@ class Queue:
         Returns:
             bool: True if the queue is empty, False otherwise.
         """
-        # Alternative condition: self._front == self._rear
         return len(self) == 0
 
 
@@ -97,7 +104,6 @@ class Queue:
         Returns:
             bool: True if the queue is full, False otherwise.
         """
-        # Alternative condition: self._front == (self._rear + 1) % self._max_size
         return len(self) == self._max_size
 
 
@@ -133,7 +139,7 @@ class Queue:
         """
         if self.is_empty():
             raise ValueError("Cannot dequeue from an empty queue")
-        
+
         value = self._data[self._front]
         self._front = (self._front + 1) % self._max_size
         self._size -= 1
