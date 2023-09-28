@@ -1,10 +1,12 @@
 # Grokking Data Structures
 
+[![Grokking Data Structures](./readme/thumbs/LaRocca-MEAP-HI.png)](https://www.manning.com/books/grokking-data-structures)
 # **Introduction**
+## | [Chapter 1](https://livebook.manning.com/book/grokking-data-structures/chapter-1) |
 ![Data structures vignette](./readme/thumbs/CH01_UN01_La_Rocca3.md.jpg)
 
 # **Static (Unsorted) Arrays**
-## | [Chapter 2](https://livebook.manning.com/book/...) | [Python](https://github.com/mlarocca/gda/blob/main/python/arrays/unsorted_array.py) |
+## | [Chapter 2](https://livebook.manning.com/book/grokking-data-structures/chapter-2) | [Python](https://github.com/mlarocca/gda/blob/main/python/arrays/unsorted_array.py) |
 
 
 ![Arrays in memory](./readme/thumbs/CH02_UN06_La_Rocca3.md.jpg)
@@ -16,7 +18,7 @@ python -m unittest tests/test_unsorted_array.py
 ```
 
 # **Sorted Arrays**
-## | [Chapter 3](https://livebook.manning.com/book/...) | [Python](https://github.com/mlarocca/gda/blob/main/python/arrays/sorted_array.py) |
+## | [Chapter 3](https://livebook.manning.com/book/grokking-data-structures/chapter-3) | [Python](https://github.com/mlarocca/gda/blob/main/python/arrays/sorted_array.py) |
 
 ![Binary search](./readme/thumbs/CH03_UN08_La_Rocca3.md.jpg)
 
@@ -24,15 +26,15 @@ python -m unittest tests/test_unsorted_array.py
 From the `./python` folder, run
 ```console
 python -m unittest tests/test_sorted_array.py
-```
+``` 
 
 # **Big-O Notation**
-## | [Chapter 4](https://livebook.manning.com/book/...) |
+## | [Chapter 4](https://livebook.manning.com/book/grokking-data-structures/chapter-4) |
 
 ![Big-O notation and the real world](./readme/thumbs/CH04_UN04_La_Rocca3.md.jpg)
 
 # **Dynamic Arrays**
-## | [Chapter 5](https://livebook.manning.com/book/...) | [Python](https://github.com/mlarocca/gda/blob/main/python/arrays/dynamic_array.py) |
+## | [Chapter 5](https://livebook.manning.com/book/grokking-data-structures/chapter-5) | [Python](https://github.com/mlarocca/gda/blob/main/python/arrays/dynamic_array.py) |
 
 ![Doubling strategy to grow a dynamic array](./readme/thumbs/CH05_UN05_La_Rocca3.md.jpg)
 
@@ -43,7 +45,7 @@ python -m unittest tests/test_dynamic_array.py
 ```
 
 # **Linked Lists**
-## | [Chapter 6](https://livebook.manning.com/book/...) |
+## | [Chapter 6](https://livebook.manning.com/book/grokking-data-structures/chapter-6) |
 
 ### Singly-Linked Lists | [Python](https://github.com/mlarocca/gda/blob/main/python/linked_lists/singly_linked_list.py) |
 
@@ -76,7 +78,7 @@ python -m unittest tests/test_doubly_linked_list.py
 ```
 
 # **Bags**
-## | [Chapter 7](https://livebook.manning.com/book/...) | [Python](https://github.com/mlarocca/gda/blob/main/python/bags/bag.py) |
+## | [Chapter 7](https://livebook.manning.com/book/grokking-data-structures/chapter-7) | [Python](https://github.com/mlarocca/gda/blob/main/python/bags/bag.py) |
 
 ![Bag data structure](./readme/thumbs/CH07_UN07_La_Rocca3.md.jpg)
 
@@ -87,7 +89,7 @@ python -m unittest tests/test_bag.py
 ```
 
 # **Stacks**
-## | [Chapter 8](https://livebook.manning.com/book/...) | [Python](https://github.com/mlarocca/gda/blob/main/python/stacks/stack.py) |
+## | [Chapter 8](https://livebook.manning.com/book/grokking-data-structures/chapter-8) | [Python](https://github.com/mlarocca/gda/blob/main/python/stacks/stack.py) |
 
 ![Stack](./readme/thumbs/CH08_UN03_La_Rocca3.md.jpg)
 
@@ -98,7 +100,7 @@ python -m unittest tests/test_stack.py
 ```
 
 # **Queues**
-## | [Chapter 9](https://livebook.manning.com/book/...) | [Python](https://github.com/mlarocca/gda/blob/main/python/queues/queue.py) |
+## | [Chapter 9](https://livebook.manning.com/book/grokking-data-structures/chapter-9) | [Python](https://github.com/mlarocca/gda/blob/main/python/queues/queue.py) |
 
 ![Queue](./readme/thumbs/CH09_UN04_La_Rocca3.md.jpg)
 
