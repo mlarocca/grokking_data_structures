@@ -1,22 +1,21 @@
-from typing import Any, List, Optional, Tuple
-
-def is_lower(x_1: Any, x_2: Any) -> bool:
-    """Returns True if x_1 < x_2."""
-    return x_1 < x_2
+from typing import Any, List, Optional
 
 class Heap:
-    """Implementation of a binary heap."""
+    """ Implementation of a binary heap.
+        The heap is a max-heap, meaning that the element with the highest priority is at the root.
+        The priority of an element, however, can be computed using a function passed
+        as an argument to the constructor.
+    """
 
-    def __init__(self, elements: List[Any] = None, is_priority_lower = is_lower) -> None:
-        """Constructor
+    def __init__(self, elements: List[Any] = None, element_priority = lambda x: x) -> None:
+        """Constructor for the heap.
 
         Args:
             elements: The elements for initializing the heap. By default, the heap is empty.
-            leq: A function that takes two elements and compares their 
-                priorities. It returns True if the first element has lower priority
-                to the second element.
+            element_priority: A function that extracts the priority of an element. 
+                              By default, the priority is the element itself.
         """
-        self._lt = is_priority_lower
+        self._get_priority = element_priority
         if elements is not None and len(elements) > 0:
             self._heapify(elements)
         else:
@@ -33,12 +32,12 @@ class Heap:
 
     def _has_lower_priority(self, element_1: Any, element_2: Any) -> bool:
         """Checks if the first element has lower priority to the second element."""
-        return self._lt(element_1, element_2)
+        return self._get_priority(element_1) < self._get_priority(element_2)
 
 
     def _has_higher_priority(self, element_1: Any, element_2: Any) -> bool:
         """Checks if the first element has higher priority to the second element."""
-        return self._lt(element_2, element_1)
+        return self._get_priority(element_1) > self._get_priority(element_2)
 
 
     def _validate(self) -> bool:
@@ -151,7 +150,7 @@ class Heap:
 
         if first_index >= size:
             # The current element has no children
-            return None
+            return None #pragma no cover
 
         if first_index + 1 >= size:
             # The current element only has one child

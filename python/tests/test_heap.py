@@ -13,7 +13,7 @@ class HeapTest(unittest.TestCase):
         self.assertEqual(4, len(heap))
         self.assertTrue(heap._validate())
 
-        heap = Heap(elements=['A', 'B', 'C', 'D'], is_priority_lower=lambda x, y: x > y)
+        heap = Heap(elements=['A', 'B', 'C', 'D'], element_priority=lambda x: -ord(x))
 
         self.assertEqual(4, len(heap))
         self.assertTrue(heap._validate())
@@ -33,7 +33,7 @@ class HeapTest(unittest.TestCase):
         self.assertEqual(4, len(heap))
         self.assertEqual('D', heap.peek())
 
-        heap = Heap(elements=['A', 'B', 'C', 'D'], is_priority_lower=lambda x, y: x > y)        
+        heap = Heap(elements=['A', 'B', 'C', 'D'], element_priority=lambda x: -ord(x))        
 
         self.assertEqual(4, len(heap))
         self.assertEqual('A', heap.peek())
@@ -69,7 +69,7 @@ class HeapTest(unittest.TestCase):
         self.assertTrue(heap._validate())
 
         # An heap populated with pairs, where the second element in the pair is the priority
-        heap = Heap(None, is_priority_lower=lambda x, y: x[1] < y[1])
+        heap = Heap(None, element_priority=lambda x: x[1])
 
         self.assertTrue(heap.is_empty())
 
