@@ -95,13 +95,12 @@ class Heap:
                  current node has no child.
         """
         first_index = self._left_child_index(index)
-        size = len(self)
 
-        if first_index >= size:
+        if first_index >= len(self):
             # The current element has no children
-            return None #pragma no cover
+            return None
 
-        if first_index + 1 >= size:
+        if first_index + 1 >= len(self):
             # The current element only has one child
             return first_index
 
@@ -133,11 +132,10 @@ class Heap:
         assert 0 <= index < len(self._elements)
         element = self._elements[index]
         current_index = index
-        first_leaf = self._first_leaf_index()
-        while current_index < first_leaf:
+        while True:
             child_index = self._highest_priority_child_index(current_index)
-            # INVARIANT: current_index is not a leaf, so it must have a child
-            assert child_index is not None
+            if child_index is None:
+                break
             if self._has_lower_priority(element, self._elements[child_index]):
                 self._elements[current_index] = self._elements[child_index]
                 current_index = child_index
@@ -214,7 +212,7 @@ class Heap:
         """Returns, WITHOUT removing it, the highest-priority element in the heap.
         If the heap is empty, raises a `ValueError`.
 
-        Returns: The element with highest priority in the heap.
+        Returns: A reference to the element with highest priority in the heap.
         """
         if self.is_empty():
             raise ValueError('Method peek called on an empty heap.')
