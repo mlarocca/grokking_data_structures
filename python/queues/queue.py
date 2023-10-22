@@ -1,7 +1,7 @@
-"""Module providing an implementation for queue, using a statically-sized array to store the elements."""
+"""Module providing an implementation for queue, using a statically-sized
+   array to store the elements."""
 
 from typing import Any
-from linked_lists.doubly_linked_list import DoublyLinkedList 
 
 class Queue:
     """ A class modeling the queue container.
@@ -11,7 +11,7 @@ class Queue:
         """ Creates a static array with size `max_size`.
         """
         if max_size <= 1:
-            raise ValueError(f'Invalid size for a queue (must have at least two elements): {max_size}')
+            raise ValueError(f'Invalid size (a queue must have at least two elements): {max_size}')
         self._data = [None] * max_size
         self._max_size = max_size
         self._front = 0
