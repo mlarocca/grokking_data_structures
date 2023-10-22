@@ -1,5 +1,6 @@
 """Binary Search Tree (BST) implementation."""
 from __future__ import annotations
+from typing import Optional
 from stacks.stack import Stack
 
 class BinarySearchTree:
@@ -44,6 +45,23 @@ class BinarySearchTree:
             """Set the right child of the node. The old value will be lost."""
             self._right = node
 
+        def find_min_in_subtree(self) -> tuple[type[BinarySearchTree.Node], type[BinarySearchTree.Node]]:
+            """Return the node with the smallest value in the subtree rooted at the node, and its parent."""
+            parent = None
+            node = self
+            while node.left() is not None:
+                parent = node
+                node = node.left()
+            return node, parent
+
+        def find_max_in_subtree(self) -> tuple[type[BinarySearchTree.Node], type[BinarySearchTree.Node]]:
+            """Return the node with the largest value in the subtree rooted at the node, and its parent."""
+            parent = None
+            node = self
+            while node.right() is not None:
+                parent = node
+                node = node.right()
+            return node, parent
 
     def __init__(self) -> None:
         self._root = None
@@ -72,18 +90,29 @@ class BinarySearchTree:
         return size
 
 
-    def contains(self, value: any) -> bool:
-        """Return True if the tree contains the value, False otherwise."""
+    def _search(self, value: any) -> Optional[type[BinarySearchTree.Node]]:
+        """Return the first node containing the value, or None if not found.
+           If the tree contains duplicates, it returns the first node traversed 
+           that contains the target value.
+        """
         node = self._root
         while node is not None:
             node_val = node.value()
             if node_val == value:
-                return True
+                return node
             elif value < node_val:
                 node = node.left()
             else:
                 node = node.right()
         return None
+    
+
+    
+
+
+    def contains(self, value: any) -> bool:
+        """Return True if the tree contains the value, False otherwise."""
+        return self._search(value) is not None
 
 
     def insert(self, value: any) -> None:

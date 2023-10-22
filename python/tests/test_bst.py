@@ -44,3 +44,31 @@ class TestBinarySearchTree(unittest.TestCase):
         self.assertEqual(len(bst), 4)
         bst.insert('Z')
         self.assertEqual(len(bst), 5)
+
+    def test_contains(self):
+        bst = BinarySearchTree()
+        self.assertFalse(bst.contains('a'))
+        self.assertFalse(bst.contains('b'))
+        self.assertFalse(bst.contains('c'))
+        self.assertFalse(bst.contains('d'))
+        self.assertFalse(bst.contains('Z'))
+
+        bst.insert('a')
+        self.assertTrue(bst.contains('a'))
+        self.assertFalse(bst.contains('b'))
+        self.assertFalse(bst.contains('c'))
+        self.assertFalse(bst.contains('d'))
+        self.assertFalse(bst.contains('Z'))
+
+        bst.insert('b')
+        bst.insert('d')
+        self.assertTrue(bst.contains('a'))
+        self.assertTrue(bst.contains('b'))
+        self.assertFalse(bst.contains('c'))
+        self.assertTrue(bst.contains('d'))        
+        self.assertFalse(bst.contains('Z'))
+        
+        bst.insert('c')
+        self.assertTrue(bst.contains('c'))
+        bst.insert('Z')
+        self.assertTrue(bst.contains('Z'))
