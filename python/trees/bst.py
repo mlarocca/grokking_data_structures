@@ -65,6 +65,7 @@ class BinarySearchTree:
                 node = node.right()
             return node, parent
 
+
     def __init__(self) -> None:
         self._root = None
 
@@ -91,6 +92,31 @@ class BinarySearchTree:
                 stack.push(node.left())
         return size
 
+
+    def __iter__(self):
+        """
+        Iterate over the values in the BST.
+
+        Parameters:
+            None
+
+        Functionality:
+            Iterates over the values in the BST. The iteration starts at the root of the BST and
+            traverses the tree using inorder traversal.
+        """
+        current = self._root
+        stack = Stack()
+        while current is not None or len(stack) > 0:
+            if current is None:
+                current = stack.pop()
+                yield current.value()
+                current = current.right()
+            else:
+                while current.left() is not None:
+                    stack.push(current)
+                    current = current.left()
+                yield current.value()
+                current = current.right()
 
     def _search(self, value: any) -> tuple[Optional[type[BinarySearchTree.Node]], type[BinarySearchTree.Node]]:
         """Returns a tuple.
@@ -167,15 +193,15 @@ class BinarySearchTree:
             raise ValueError('Value not found')
 
         if node.left() is None or node.right() is None:
-            not_none_child = node.right() if node.left() is None else node.left()
+            maybe_child = node.right() if node.left() is None else node.left()
             # The node has at most only one child
             if parent is None:
                 # The node is the root
-                self._root = not_none_child
+                self._root = maybe_child
             elif value <= parent.value():
-                parent.set_left(not_none_child)
+                parent.set_left(maybe_child)
             else:
-                parent.set_right(not_none_child)
+                parent.set_right(maybe_child)
         else: # The node N has two children.
             # Find and remove the node M with the largest value in the left subtree of N.
             max_node, max_node_parent = node.left().find_max_in_subtree()
