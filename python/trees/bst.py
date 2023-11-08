@@ -118,6 +118,7 @@ class BinarySearchTree:
                 yield current.value()
                 current = current.right()
 
+
     def _search(self, value: any) -> tuple[Optional[type[BinarySearchTree.Node]], type[BinarySearchTree.Node]]:
         """Returns a tuple.
            The first element in the tuple is the node containing the target value,
@@ -161,22 +162,23 @@ class BinarySearchTree:
         if node is None:
             # Empty tree
             self._root = BinarySearchTree.Node(value)
-        while node is not None:
-            if value <= node.value():
-                if node.left() is None:
+        else:
+            while True:
+                if value <= node.value():
+                    if node.left() is None:
+                        # We have found the right spot for value
+                        node.set_left(BinarySearchTree.Node(value))
+                        break
+                    else:
+                        # We keep traversing the left branch
+                        node = node.left()
+                elif node.right() is None:
                     # We have found the right spot for value
-                    node.set_left(BinarySearchTree.Node(value))
+                    node.set_right(BinarySearchTree.Node(value))
                     break
                 else:
-                    # We keep traversing the left branch
-                    node = node.left()
-            elif node.right() is None:
-                # We have found the right spot for value
-                node.set_right(BinarySearchTree.Node(value))
-                break
-            else:
-                # We keep traversing the right branch
-                node = node.right()
+                    # We keep traversing the right branch
+                    node = node.right()
 
     def delete(self, value: any) -> None:
         """ Delete a value from the tree.
