@@ -211,7 +211,7 @@ class BinarySearchTree:
                 new_node = BinarySearchTree.Node(max_node.value(), None, node.right())
             else:
                 new_node = BinarySearchTree.Node(max_node.value(), node.left(), node.right())
-                max_node_parent.set_right(None)
+                max_node_parent.set_right(max_node.left())
             # Then  replace the node to be deleted with a new node with M.value(),
             # and the same subtrees as N.
             if parent is None:

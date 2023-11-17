@@ -179,7 +179,7 @@ class TestBinarySearchTree(unittest.TestCase):
         self.assertFalse(bst.contains(10))
         self.assertTrue(bst.contains(11))
 
-        # It must have replaced the old root with 
+        # It must have replaced the old root with
         # the other occurrence of the same value
         self.assertEqual(bst._root._value, 6)
 
@@ -213,6 +213,39 @@ class TestBinarySearchTree(unittest.TestCase):
         self.assertFalse(bst.contains(9))
         self.assertFalse(bst.contains(10))
         self.assertTrue(bst.contains(11))
+
+        # Delete a node with both children, with the successor of the node having a left subtree
+        bst = BinarySearchTree()
+
+        bst.insert('H')
+        bst.insert('F')
+        bst.insert('I')
+        bst.insert('G')
+        bst.insert('B')
+        bst.insert('E')
+        bst.insert('K')
+        bst.insert('A')
+        bst.insert('J')
+        bst.insert('L')
+        bst.insert('C')
+        bst.insert('D')
+        self.assertEqual(len(bst), 12)
+
+        bst.delete('F')
+        self.assertEqual(len(bst), 11)
+        self.assertTrue(bst.contains('A'))
+        self.assertTrue(bst.contains('B'))
+        self.assertTrue(bst.contains('C'))
+        self.assertTrue(bst.contains('D'))
+        self.assertTrue(bst.contains('E'))
+        self.assertFalse(bst.contains('F'))
+        self.assertTrue(bst.contains('G'))
+        self.assertTrue(bst.contains('H'))
+        self.assertTrue(bst.contains('I'))
+        self.assertTrue(bst.contains('J'))
+        self.assertTrue(bst.contains('K'))
+        self.assertTrue(bst.contains('L'))
+
 
 
     def test_iterate(self):
