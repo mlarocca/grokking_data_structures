@@ -1,11 +1,12 @@
 from math import floor, sqrt
+from decimal import Decimal
 from linked_lists.singly_linked_list import SinglyLinkedList
 
 class HashTable:
     """ A hash table with chaining implementation.
     """
 
-    __A__ = (sqrt(5) - 1) / 2
+    __A__ = Decimal((sqrt(5) - 1) / 2)
 
     def __init__(self, buckets) -> None:
         self.m = buckets
@@ -19,9 +20,9 @@ class HashTable:
 
 
     def _hash(self, key):
-        """ Computes the index associated with a key in this hash table.
+        """ Computes the index in this hash table associated with a key.
         """
-        return floor(self.m * (hash(key) * HashTable.__A__) % 1)
+        return floor(abs(self.m * ((hash(key) * HashTable.__A__) % 1)))
 
 
     def _search(self, value):
