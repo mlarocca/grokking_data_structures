@@ -48,6 +48,54 @@ class TestHashTable(unittest.TestCase):
         hash_table.insert('A')
         self.assertTrue(hash_table.contains('A'))
 
+    def test_search(self):
+        hash_table = HashTable(3)
+        self.assertIsNone(hash_table.search(hash('a')))
+        self.assertIsNone(hash_table.search(hash('b')))
+        self.assertIsNone(hash_table.search(hash('c')))
+        self.assertIsNone(hash_table.search(hash('d')))
+        self.assertIsNone(hash_table.search(hash('Z')))
+
+        hash_table.insert('a')
+        self.assertEqual(hash_table.search(hash('a')), 'a')
+        self.assertIsNone(hash_table.search(hash('b')))
+        self.assertIsNone(hash_table.search(hash('c')))
+        self.assertIsNone(hash_table.search(hash('d')))
+        self.assertIsNone(hash_table.search(hash('Z')))
+
+        hash_table.insert('b')
+        hash_table.insert('d')
+        self.assertEqual(hash_table.search(hash('a')), 'a')
+        self.assertEqual(hash_table.search(hash('b')), 'b')
+        self.assertIsNone(hash_table.search(hash('c')))
+        self.assertEqual(hash_table.search(hash('d')), 'd')
+        self.assertIsNone(hash_table.search(hash('Z')))
+
+        hash_table.insert('c')
+        self.assertEqual(hash_table.search(hash('c')), 'c')
+        hash_table.insert('XYZ')
+        self.assertEqual(hash_table.search(hash('XYZ')), 'XYZ')
+        hash_table.insert(1)
+        self.assertEqual(hash_table.search(hash(1)), 1)
+
+        # Custom hash function
+        key = lambda x: x * x * x
+        hash_table = HashTable(5, extract_key=key)
+
+        hash_table.insert(-1)
+        hash_table.insert(0)
+        hash_table.insert(1)
+        hash_table.insert(2)
+        self.assertEqual(hash_table.search(key(-1)), -1)
+        self.assertEqual(hash_table.search(key(1)), 1)
+        self.assertEqual(hash_table.search(key(0)), 0)
+        self.assertEqual(hash_table.search(key(2)), 2)
+        self.assertIsNone(hash_table.search(key(-2)))
+        self.assertIsNone(hash_table.search(key(-3)))
+        self.assertIsNone(hash_table.search(key(3)))
+        self.assertIsNone(hash_table.search(key(0.4)))
+
+
     def test_insert_delete(self):
         hash_table = HashTable(5)
 
