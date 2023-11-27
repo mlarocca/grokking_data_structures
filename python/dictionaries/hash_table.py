@@ -10,6 +10,8 @@ class HashTable:
     __A__ = Decimal((sqrt(5) - 1) / 2)
 
     def __init__(self, buckets: int, extract_key:  Callable[..., Any]=hash) -> None:
+        if buckets <= 0:
+            raise ValueError(f'Invalid size for the hash table (must be positive): {buckets}')
         self.m = buckets
         self._data = [SinglyLinkedList() for _ in range(buckets)]
         self._extract_key = extract_key

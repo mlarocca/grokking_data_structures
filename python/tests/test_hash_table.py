@@ -3,6 +3,11 @@ from dictionaries.hash_table import HashTable
 
 class TestHashTable(unittest.TestCase):
 
+    def test_init_invalid_size(self):
+        """Test initializing a HashTable with an invalid size"""
+        with self.assertRaises(ValueError):
+            HashTable(-1)
+
     def test_len(self):
         hash_table = HashTable(2)
         self.assertEqual(len(hash_table), 0)
@@ -17,6 +22,16 @@ class TestHashTable(unittest.TestCase):
         self.assertEqual(len(hash_table), 4)
         hash_table.insert('Jsut some random string')
         self.assertEqual(len(hash_table), 5)
+
+    def test_is_empty(self):
+        hash_table = HashTable(22)
+        self.assertTrue(hash_table.is_empty())
+
+        hash_table.insert('a')
+        self.assertFalse(hash_table.is_empty())
+
+        hash_table.insert('bba')
+        self.assertFalse(hash_table.is_empty())
 
     def test_contains(self):
         hash_table = HashTable(3)
