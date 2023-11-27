@@ -336,6 +336,26 @@ class SinglyLinkedList:
         return None
 
 
+    def search(self, predicate:  Callable[..., Any]) -> Optional[Any]:
+        """
+        Search the list for the first node whose data matches the predicate function.
+        
+        Parameters:
+            predicate (Callable): The predicate function to evaluate node data against.
+                                Should accept a single parameter for the node data.
+                                
+        Returns:
+            Optional[Any]: The first element for which predicate(element) is True, 
+                        or None if no match is found.
+        """
+        current = self._head
+        while current is not None:
+            if predicate(current.data()):
+                return current.data()
+            current = current.next()
+        return None
+
+
     def delete(self, target: Any) -> None:
         """
         Delete the first node with the given data from the list.

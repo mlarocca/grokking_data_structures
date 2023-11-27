@@ -154,7 +154,7 @@ class TestSinglyLinkedList(unittest.TestCase):
         self.assertEqual(linked_list.get(0), [['a', 'b'], 1, 2])
 
 
-    def test_search(self):
+    def test_internal_search(self):
         linked_list = SinglyLinkedList()
 
         # Search empty list
@@ -174,6 +174,39 @@ class TestSinglyLinkedList(unittest.TestCase):
         found = linked_list._search(2)
         self.assertEqual(found.data(), 2)
 
+
+    def test_search_empty_list(self):
+        linked_list = SinglyLinkedList()
+        result = linked_list.search(lambda x: x == 1)
+        self.assertIsNone(result)
+
+    def test_search_not_found(self):
+        linked_list = SinglyLinkedList()
+        linked_list.insert_in_front(2)
+        linked_list.insert_in_front(3)
+        result = linked_list.search(lambda x: x == 1)
+        self.assertIsNone(result)
+
+    def test_search_found(self):
+        linked_list = SinglyLinkedList()
+        linked_list.insert_in_front(3)
+        linked_list.insert_in_front(2)
+        linked_list.insert_in_front(1)
+        result = linked_list.search(lambda x: x == 1)
+        self.assertEqual(result, 1)
+        result = linked_list.search(lambda x: x == 2)
+        self.assertEqual(result, 2)
+        result = linked_list.search(lambda x: x == 3)
+        self.assertEqual(result, 3)
+
+    def test_search_multiple_matches(self):
+        linked_list = SinglyLinkedList()
+        linked_list.insert_in_front('AB')
+        linked_list.insert_in_front('C')
+        linked_list.insert_in_front('ABC')
+        linked_list.insert_in_front('B')
+        result = linked_list.search(lambda x: x[0] == 'A')
+        self.assertEqual(result, 'ABC')
 
     def test_delete(self):
         linked_list = SinglyLinkedList()
