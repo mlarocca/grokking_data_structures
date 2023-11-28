@@ -12,7 +12,7 @@ class HashTable:
     def __init__(self, buckets: int, extract_key:  Callable[..., Any]=hash) -> None:
         if buckets <= 0:
             raise ValueError(f'Invalid size for the hash table (must be positive): {buckets}')
-        self.m = buckets
+        self._m = buckets
         self._data = [SinglyLinkedList() for _ in range(buckets)]
         self._extract_key = extract_key
 
@@ -23,19 +23,19 @@ class HashTable:
         return sum((len(bucket) for bucket in self._data))
 
 
-    def _hash(self, key):
+    def _hash(self, key: int):
         """ Computes the index in this hash table associated with a key.
         """
-        return floor(abs(self.m * ((Decimal(key) * HashTable.__A__) % 1)))
+        return floor(abs(self._m * ((Decimal(key) * HashTable.__A__) % 1)))
 
 
-    def is_empty(self):
+    def is_empty(self) -> int:
         """ Check if the hash table is empty.
         """
         return len(self) == 0
 
 
-    def search(self, key):
+    def search(self, key: int) -> Any:
         """
         Search for a value with the given key in the hash table.
         
@@ -49,10 +49,11 @@ class HashTable:
             The value associated with the key if found, None otherwise.
         """
         index = self._hash(key)
-        return self._data[index].search(lambda x: self._extract_key(x) == key)
+        value_matches_key = lambda x: self._extract_key(x) == key
+        return self._data[index].search(value_matches_key)
 
 
-    def insert(self, value):
+    def insert(self, value: Any) -> None:
         """ Insert a value in the hash table.
 
             Parameters:
@@ -62,7 +63,7 @@ class HashTable:
         self._data[index].insert_in_front(value)
 
 
-    def contains(self, value):
+    def contains(self, value: Any) -> bool:
         """ Check if a value is in the hash table.
 
             Parameters:
@@ -74,7 +75,7 @@ class HashTable:
         return self.search(self._extract_key(value)) is not None
 
 
-    def delete(self, value):
+    def delete(self, value: Any) -> None:
         """ Delete a value from the hash table.
 
             Parameters:
