@@ -49,7 +49,7 @@ class HashTable:
             The value associated with the key if found, None otherwise.
         """
         index = self._hash(key)
-        value_matches_key = lambda x: self._extract_key(x) == key
+        value_matches_key = lambda v: self._extract_key(v) == key
         return self._data[index].search(value_matches_key)
 
 
