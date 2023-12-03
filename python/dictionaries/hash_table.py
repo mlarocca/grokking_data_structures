@@ -10,6 +10,19 @@ class HashTable:
     __A__ = Decimal((sqrt(5) - 1) / 2)
 
     def __init__(self, buckets: int, extract_key:  Callable[..., Any]=hash) -> None:
+        """ Create an empty hash table. Chaining is used for collision resolution.
+
+        Parameters:
+            buckets: The size of the hash table, that is, the number of hash chains.
+                Note that the size of the hash table is not the number of elements it can store,
+                which is unbounded.
+                The size must be a positive integer.
+            extract_key: A function that extracts the key from any value stored in the table.
+                Note that, for the table to work properly, keys must be integers uniquely
+                identifying the values stored in the table.
+                If not given, the built-in `hash` function is used.
+
+        """
         if buckets <= 0:
             raise ValueError(f'Invalid size for the hash table (must be positive): {buckets}')
         self._m = buckets
@@ -38,9 +51,6 @@ class HashTable:
     def search(self, key: int) -> Any:
         """
         Search for a value with the given key in the hash table.
-        
-        This is an internal method used to find the index and bucket for a key, 
-        and then search in that bucket's linked list for the key.
         
         Parameters:
             key: The key to search for.
