@@ -1,6 +1,13 @@
 # Grokking Data Structures
 
 [![Grokking Data Structures](./readme/thumbs/LaRocca-MEAP-HI.png)](https://www.manning.com/books/grokking-data-structures)
+
+### To Run All Tests: 
+From the `./python` folder, run
+```console
+python -m unittest tests/test_*
+```
+
 # **Introduction**
 ## | [Chapter 1](https://livebook.manning.com/book/grokking-data-structures/chapter-1) |
 ![Data structures vignette](./readme/thumbs/CH01_UN01_La_Rocca3.md.jpg)
@@ -91,7 +98,7 @@ python -m unittest tests/test_bag.py
 # **Stacks**
 ## | [Chapter 8](https://livebook.manning.com/book/grokking-data-structures/chapter-8) | [Python](https://github.com/mlarocca/gda/blob/main/python/stacks/stack.py) |
 
-![Stack](./readme/thumbs/CH08_UN03_La_Rocca3.md.jpg)
+![A Stack in action](./readme/thumbs/CH08_UN03_La_Rocca3.md.jpg)
 
 ### Run Tests: 
 From the `./python` folder, run
@@ -102,10 +109,54 @@ python -m unittest tests/test_stack.py
 # **Queues**
 ## | [Chapter 9](https://livebook.manning.com/book/grokking-data-structures/chapter-9) | [Python](https://github.com/mlarocca/gda/blob/main/python/queues/queue.py) |
 
-![Queue](./readme/thumbs/CH09_UN04_La_Rocca3.md.jpg)
+![A Queue in action](./readme/thumbs/CH09_UN04_La_Rocca3.md.jpg)
 
 ### Run Tests: 
 From the `./python` folder, run
 ```console
 python -m unittest tests/test_queue.py
+```
+
+# **Priority queues and heaps**
+## | [Chapter 10](https://livebook.manning.com/book/grokking-data-structures/chapter-10) | [Python](https://github.com/mlarocca/grokking_data_structures/blob/main/python/queues/heap.py) |
+
+![A heap](./readme/thumbs/CH10_UN14_La_Rocca3.md.jpg)
+
+### Run Tests: 
+From the `./python` folder, run
+```console
+python -m unittest tests/test_heap.py
+```
+
+# **Binary search trees**
+## | [Chapter 11](https://livebook.manning.com/book/grokking-data-structures/chapter-11) | [Python](https://github.com/mlarocca/grokking_data_structures/blob/main/python/trees/bst.py) |
+
+![A generic tree](./readme/thumbs/CH11_UN01_La_Rocca3.md.jpg)
+
+### Run Tests: 
+From the `./python` folder, run
+```console
+python -m unittest tests/test_bst.py
+```
+
+# **Dictionaries and hash tables**
+## | [Chapter 12](https://livebook.manning.com/book/grokking-data-structures/chapter-12) | [Python](https://github.com/mlarocca/grokking_data_structures/blob/main/python/dictionaries/hash_table.py) |
+
+![From object to hash](./readme/thumbs/CH12_UN08_La_Rocca3.md.jpg)
+
+### Run Tests: 
+From the `./python` folder, run
+```console
+python -m unittest tests/test_hash_table.py
+```
+
+# **Graphs**
+## | [Chapter 13](https://livebook.manning.com/book/grokking-data-structures/chapter-13) | [Python](https://github.com/mlarocca/grokking_data_structures/blob/main/python/graphs/graph.py) |
+
+![An undirected graph](./readme/thumbs/CH13_UN06_La_Rocca3.md.jpg)
+
+### Run Tests: 
+From the `./python` folder, run
+```console
+python -m unittest tests/test_graph.py
 ```
