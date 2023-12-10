@@ -77,11 +77,11 @@ class Graph:
 
 
     def __repr__(self) -> str:
-        def ed_str(edges):
-            return f"[{', '.join([f'->{u}' for (_, u) in edges])}]"
+        def edges_repr(edges):
+            return f"[{', '.join((f'->{u}' for (_, u) in edges))}]"
 
-        internals = ' | '.join([f'{repr(v)}: {ed_str(v.outgoing_edges())}' for v in self._adj.values()])
-        return f'Graph({internals})'
+        adj_lst_repr = (f'{repr(v)}: {edges_repr(v.outgoing_edges())}' for v in self._adj.values())
+        return f'Graph({" | ".join(adj_lst_repr)})'
 
 
     def _get_vertex(self, key: Any) -> Type[Graph.Vertex]:
