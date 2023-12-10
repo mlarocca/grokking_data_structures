@@ -260,7 +260,7 @@ class TestBinarySearchTree(unittest.TestCase):
         bst.insert(4)
 
         self.assertEqual([v for v in bst], [4, 6])
-        
+
         bst.insert(7)
         bst.insert(5)
         bst.insert(2)
