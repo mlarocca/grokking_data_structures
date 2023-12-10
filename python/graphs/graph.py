@@ -1,5 +1,5 @@
 from __future__ import annotations
-from typing import Any, Type
+from typing import Any, Type, Tuple
 from linked_lists.singly_linked_list import SinglyLinkedList
 
 class Graph:
@@ -39,7 +39,7 @@ class Graph:
             Returns:
                 bool: True if there is an edge from this vertex to the destination, False otherwise.
             """
-            return self._adj_list._search(destination_vertex) is not None
+            return self._adj_list.search(lambda v: v == destination_vertex) is not None
 
         def add_edge_to(self, destination_vertex: Type[Graph.Vertex]) -> None:
             """Add an edge from this vertex to the destination vertex.
@@ -67,7 +67,7 @@ class Graph:
 
             Returns:
                 list[Tuple[Any, Any]]: A list of tuples of the form (source, destination).
-                    The vertices are represented by their keys.
+                    For both vertices we return their keys.
             """
             return [(self._id, v._id) for v in self._adj_list]
 
