@@ -27,6 +27,30 @@ class TestGraph(unittest.TestCase):
         return graph
 
 
+    def create_bfs_disconnected_graph(self):
+        graph = Graph()
+        graph.insert_vertex(1)
+        graph.insert_vertex(2)
+        graph.insert_vertex(3)
+        graph.insert_vertex(4)
+        graph.insert_vertex(5)
+        graph.insert_edge(1, 2)
+        graph.insert_edge(1, 3)
+        graph.insert_edge(2, 3)
+        graph.insert_edge(2, 4)
+        graph.insert_edge(3, 5)
+        graph.insert_edge(4, 1)
+
+        graph.insert_vertex(6)
+        graph.insert_vertex(7)
+        graph.insert_vertex(8)
+        graph.insert_edge(6, 7)
+
+        self.assertEqual(graph.vertex_count(), 8)
+        self.assertEqual(graph.edge_count(), 7)
+        return graph
+
+
     def test_repr(self):
         graph = Graph()
         self.assertEqual(repr(graph), 'Graph()')
@@ -225,3 +249,26 @@ class TestGraph(unittest.TestCase):
         graph = self.create_test_graph()
         expected_edges = set([(1, 0.23), (0.23, 1), (1, 'ABC'), (1, 'WXYZ'), ('ABC', 'WXYZ'), (0.23, 'ABC')])
         self.assertSetEqual(graph.get_edges(), expected_edges)
+
+
+    def test_bfs(self):
+        graph = self.create_bfs_disconnected_graph()
+        result = graph.bfs(4, 3)
+        self.assertListEqual(result, [4, 1, 3])
+
+        result = graph.bfs(4, 5)
+        self.assertListEqual(result, [4, 1, 3, 5])
+
+        result = graph.bfs(2, 1)
+        self.assertListEqual(result, [2, 4, 1])
+
+        result = graph.bfs(1, 6)
+        self.assertIsNone(result)
+
+    def test_bfs_invalid_arguments(self):
+        graph = self.create_test_graph()
+        with self.assertRaises(ValueError):
+            graph.bfs('Invalid', 1)
+
+        with self.assertRaises(ValueError):
+            graph.bfs(1, 'Invalid')

@@ -1,6 +1,7 @@
 from __future__ import annotations
 from typing import Any, Type, Tuple
 from linked_lists.singly_linked_list import SinglyLinkedList
+from queues.queue import Queue
 
 class Graph:
     """A class modeling a simple, directed, unweighted graph."""
@@ -15,20 +16,20 @@ class Graph:
                 key: The unique identifier for this vertex.
             
             """
-            self._id = key
+            self.id = key
             self._adj_list = SinglyLinkedList()
 
         def __eq__(self, other: Type[Graph.Vertex]):
-            return self._id == other._id
+            return self.id == other.id
 
         def __hash__(self) -> int:
             return hash(repr(self)) # pragma: no cover
 
         def __repr__(self) -> str:
-            return f'Vertex({repr(self._id)})'
+            return f'Vertex({repr(self.id)})'
 
         def __str__(self) -> str:
-            return f'<{str(self._id)}>'
+            return f'<{str(self.id)}>'
 
         def has_edge_to(self, destination_vertex: Type[Graph.Vertex]) -> bool:
             """Check if there is an edge from this vertex to the destination vertex.
@@ -69,7 +70,7 @@ class Graph:
                 list[Tuple[Any, Any]]: A list of tuples of the form (source, destination).
                     For both vertices we return their keys.
             """
-            return [(self._id, v._id) for v in self._adj_list]
+            return [(self.id, v.id) for v in self._adj_list]
 
 
     def __init__(self):
@@ -217,4 +218,55 @@ class Graph:
         Returns:
             int: The number of edges in the graph.
         """
-        return sum(len(v._adj_list) for v in self._adj.values())
+        return sum(len(v.outgoing_edges()) for v in self._adj.values())
+
+
+    def bfs(self, start_vertex: Any, target_vertex: Any) -> list[Any]:
+        """Perform a breadth-first search from a given vertex.
+           Looks for the shortest path from the start vertex to the target vertex.
+
+        Parameters:
+            start_vertex: The unique identifier of the start vertex.
+            target_vertex: The unique identifier of the target vertex.
+        
+        Returns:
+        list[Any]: A list of vertex keys representing the shortest path from the start vertex 
+            to the target vertex.
+        """
+        if not self.has_vertex(start_vertex):
+            raise ValueError(f'Start vertex {start_vertex} does not exist!')
+        if not self.has_vertex(target_vertex):
+            raise ValueError(f'Target vertex {target_vertex} does not exist!')
+
+        def reconstruct_path(pred: dict[Any, Any], target: Any) -> list[Any]:
+            # Reconstruct the path from start to target by going back until it finds a vertex
+            # without predecessor: That can only be the start vertex
+            path = []
+            while target:
+                path.append(target)
+                target = pred[target]
+            return path[::-1]
+
+        distance = {v: float('inf') for v in self._adj}
+        predecessor = {v: None for v in self._adj}
+
+        queue = Queue(self.vertex_count())
+        # Initially, we add the start vertex to the queue
+        queue.enqueue(start_vertex)
+        distance[start_vertex] = 0
+
+        while not queue.is_empty():
+            u = queue.dequeue()
+            if u == target_vertex:
+                # We have found the shortest path to the target
+                return reconstruct_path(predecessor, target_vertex)
+
+            # For each of u's neighbors, we check if there was already a shorter path to them
+            for (_, v) in self._adj[u].outgoing_edges():
+                if distance[v] == float('inf'):
+                    distance[v] = distance[u] + 1
+                    predecessor[v] = u
+                    queue.enqueue(v)
+
+        #At this point, we know there is no path from the start to the target vertex
+        return None
