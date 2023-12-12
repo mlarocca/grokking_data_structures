@@ -265,6 +265,7 @@ class TestGraph(unittest.TestCase):
         result = graph.bfs(1, 6)
         self.assertIsNone(result)
 
+
     def test_bfs_invalid_arguments(self):
         graph = self.create_test_graph()
         with self.assertRaises(ValueError):
@@ -272,3 +273,112 @@ class TestGraph(unittest.TestCase):
 
         with self.assertRaises(ValueError):
             graph.bfs(1, 'Invalid')
+
+
+    def test_dfs_invalid_arguments(self):
+        graph = self.create_test_graph()
+        with self.assertRaises(ValueError):
+            graph.dfs('Invalid')
+
+        with self.assertRaises(ValueError):
+            graph.dfs('Invalid', {})
+
+
+    def test_dfs(self):
+        graph = self.create_bfs_disconnected_graph()
+        acyclic, color = graph.dfs(4)
+        self.assertFalse(acyclic)
+        self.assertEqual(color, {1: 'black',
+                                 2: 'black',
+                                 3: 'black',
+                                 4: 'black',
+                                 5: 'black',
+                                 6: 'white',
+                                 7: 'white',
+                                 8: 'white'})
+
+        acyclic, color = graph.dfs(2)
+        self.assertFalse(acyclic)
+        self.assertEqual(color, {1: 'black',
+                                 2: 'black',
+                                 3: 'black',
+                                 4: 'black',
+                                 5: 'black',
+                                 6: 'white',
+                                 7: 'white',
+                                 8: 'white'})
+
+        acyclic, color = graph.dfs(3)
+        self.assertTrue(acyclic)
+        self.assertEqual(color, {1: 'white',
+                                 2: 'white',
+                                 3: 'black',
+                                 4: 'white',
+                                 5: 'black',
+                                 6: 'white',
+                                 7: 'white',
+                                 8: 'white'})
+
+        acyclic, color = graph.dfs(6)
+        self.assertTrue(acyclic)
+        self.assertEqual(color, {1: 'white',
+                                 2: 'white',
+                                 3: 'white',
+                                 4: 'white',
+                                 5: 'white',
+                                 6: 'black',
+                                 7: 'black',
+                                 8: 'white'})
+
+        acyclic, color = graph.dfs(3)
+        self.assertTrue(acyclic)
+        self.assertEqual(color, {1: 'white',
+                                 2: 'white',
+                                 3: 'black',
+                                 4: 'white',
+                                 5: 'black',
+                                 6: 'white',
+                                 7: 'white',
+                                 8: 'white'})
+
+        # Test passing the color dictionary as second argument
+        acyclic, color = graph.dfs(2)
+        self.assertFalse(acyclic)
+        acyclic, color = graph.dfs(6, color)
+        # Note that the result refers only to what could be learned in the last call of dfs!
+        self.assertTrue(acyclic)
+        self.assertEqual(color, {1: 'black',
+                                 2: 'black',
+                                 3: 'black',
+                                 4: 'black',
+                                 5: 'black',
+                                 6: 'black',
+                                 7: 'black',
+                                 8: 'white'})
+
+        acyclic, color = graph.dfs(6)
+        self.assertTrue(acyclic)
+        acyclic, color = graph.dfs(2, color)
+        self.assertFalse(acyclic)
+        self.assertEqual(color, {1: 'black',
+                                 2: 'black',
+                                 3: 'black',
+                                 4: 'black',
+                                 5: 'black',
+                                 6: 'black',
+                                 7: 'black',
+                                 8: 'white'})
+
+        graph.delete_edge(4, 1)
+        acyclic, color = graph.dfs(3)
+        self.assertTrue(acyclic)
+        acyclic, color = graph.dfs(2, color)
+        self.assertTrue(acyclic)
+        self.assertEqual(color, {1: 'white',
+                                 2: 'black',
+                                 3: 'black',
+                                 4: 'black',
+                                 5: 'black',
+                                 6: 'white',
+                                 7: 'white',
+                                 8: 'white'})

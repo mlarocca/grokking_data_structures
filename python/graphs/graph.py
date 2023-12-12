@@ -2,6 +2,7 @@ from __future__ import annotations
 from typing import Any, Type, Tuple
 from linked_lists.singly_linked_list import SinglyLinkedList
 from queues.queue import Queue
+from stacks.stack import Stack
 
 class Graph:
     """A class modeling a simple, directed, unweighted graph."""
@@ -270,3 +271,37 @@ class Graph:
 
         #At this point, we know there is no path from the start to the target vertex
         return None
+
+    def dfs(self, start_vertex: Any, color: dict[Any, str] = None) -> Tuple[bool, dict[Any, str]]:
+        """Perform a depth-first search from a given vertex.
+           Looks for the shortest path from the start vertex to the target vertex.
+
+        Parameters:
+            start_vertex: The unique identifier of the start vertex.
+            color: A dictionary mapping vertices to colors. If not provided,
+                a new dictionary is created.
+
+        Returns:
+            Tuple[bool, dict[Any, str]]: A tuple containing a boolean indicating whether the graph
+                is acyclic, and the up-to-date dictionary mapping vertices to colors.
+        """
+        if not self.has_vertex(start_vertex):
+            raise ValueError(f'Start vertex {start_vertex} does not exist!')
+        if color is None:
+            color = {v: 'white' for v in self._adj}
+        acyclic = True
+        stack = Stack()
+        stack.push((False, start_vertex))
+        while not stack.is_empty():
+            (end_visit, v) = stack.pop()
+            col = color.get(v, 'white')
+            if end_visit:
+                color[v] = 'black'
+            elif col == 'grey':
+                acyclic = False
+            elif col == 'white':
+                color[v] = 'grey'
+                stack.push((True, v))
+                for (_, w) in self._adj[v].outgoing_edges():
+                    stack.push((False, w))
+        return acyclic, color
