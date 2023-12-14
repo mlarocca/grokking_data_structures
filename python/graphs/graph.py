@@ -130,7 +130,7 @@ class Graph:
         """
         v = self._get_vertex(key)
         for u in self._adj.values():
-            if u.has_edge_to(v):
+            if u != v and u.has_edge_to(v):
                 u.delete_edge_to(v)
         del self._adj[key]
 
