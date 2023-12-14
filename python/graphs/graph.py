@@ -128,9 +128,7 @@ class Graph:
             ValueError: If no vertex with the given key exists.
         
         """
-        if not key in self._adj:
-            raise ValueError(f'Vertex {key} doesn\'t exist!')
-        v = self._adj[key]
+        v = self._get_vertex(key)
         for u in self._adj.values():
             if u.has_edge_to(v):
                 u.delete_edge_to(v)
@@ -263,7 +261,7 @@ class Graph:
                 return reconstruct_path(predecessor, target_vertex)
 
             # For each of u's neighbors, we check if there was already a shorter path to them
-            for (_, v) in self._adj[u].outgoing_edges():
+            for (_, v) in self._get_vertex(u).outgoing_edges():
                 if distance[v] == float('inf'):
                     distance[v] = distance[u] + 1
                     predecessor[v] = u
@@ -293,15 +291,15 @@ class Graph:
         stack = Stack()
         stack.push((False, start_vertex))
         while not stack.is_empty():
-            (end_visit, v) = stack.pop()
+            (mark_as_black, v) = stack.pop()
             col = color.get(v, 'white')
-            if end_visit:
+            if mark_as_black:
                 color[v] = 'black'
             elif col == 'grey':
                 acyclic = False
             elif col == 'white':
                 color[v] = 'grey'
                 stack.push((True, v))
-                for (_, w) in self._adj[v].outgoing_edges():
+                for (_, w) in self._get_vertex(v).outgoing_edges():
                     stack.push((False, w))
         return acyclic, color
