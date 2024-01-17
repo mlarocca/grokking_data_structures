@@ -163,7 +163,7 @@ class BinarySearchTree:
             # Empty tree
             self._root = BinarySearchTree.Node(value)
         else:
-            while True:
+            while True: # node can never be None here
                 if value <= node.value():
                     if node.left() is None:
                         # We have found the right spot for value
