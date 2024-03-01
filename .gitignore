@@ -6,3 +6,9 @@
 
 # Profiling
 profiling/results
+
+# C#
+c#/bin
+c#/obj
+c#/*.csproj
+*.sln

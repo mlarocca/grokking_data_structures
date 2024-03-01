@@ -8,6 +8,12 @@ From the `./python` folder, run
 python -m unittest tests/test_*
 ```
 
+## Note on Python
+
+The code in the book also doesn’t have type hints, which you can find instead in the version hosted here on GitHub. This decision was made to reduce code clutter and to avoid additional cognitive load for beginners who may not be familiar with type hints in Python. Similarly, the book doesn't include tests.
+
+However, in this repository you have the chance to find the full code with type hints, and tests.
+
 # **Introduction**
 ## | [Chapter 1](https://livebook.manning.com/book/grokking-data-structures/chapter-1) |
 ![Data structures vignette](./readme/thumbs/CH01_UN01_La_Rocca3.md.jpg)
