@@ -141,6 +141,48 @@ class TestQueue(TestQueueTemplate, unittest.TestCase):
         self.assertEqual(repr(queue), 'Queue([1, 2, 3.14])')
 
 
+    def test_iter_fixed_size_queue(self):
+        queue = self.new_queue()
+        queue.enqueue(1)
+        queue.enqueue(2)
+        queue.enqueue(3)
+        queue.dequeue()
+        queue.enqueue(4)
+        queue.enqueue(5)
+        queue.dequeue()
+        queue.enqueue(6)
+
+        iterated = [x for x in queue]
+        self.assertEqual(iterated, [3, 4, 5, 6])
+        self.assertTrue(queue.is_empty())
+
+        queue = self.new_queue(5)
+        queue.enqueue('a')
+        queue.enqueue('b')
+        queue.enqueue('c')
+        queue.enqueue('d')
+        queue.enqueue('e')
+
+        iterated = [x for x in queue]
+        self.assertEqual(iterated, ['a', 'b', 'c', 'd', 'e'])
+        self.assertTrue(queue.is_empty())
+
+        queue = self.new_queue(5)
+        queue.enqueue('a')
+        queue.enqueue('b')
+        queue.enqueue('c')
+        queue.dequeue()
+        queue.enqueue('d')
+        queue.enqueue('e')
+        queue.enqueue('f')
+
+        self.assertTrue(queue.is_full())
+
+        iterated = [x for x in queue]
+        self.assertEqual(iterated, ['b', 'c', 'd', 'e', 'f'])
+        self.assertTrue(queue.is_empty())
+
+
     def test_str(self):
         queue = self.new_queue(5)
         self.assertEqual(str(queue), '[]')
@@ -161,6 +203,10 @@ class TestQueue(TestQueueTemplate, unittest.TestCase):
 
         self.assertEqual(str(queue), '[\'c\', \'d\', \'e\', \'f\']')
 
+        queue.enqueue('g')
+        self.assertEqual(str(queue), '[\'c\', \'d\', \'e\', \'f\', \'g\']')
+
+
     def test_str_with_full_queue(self):
         queue = self.new_queue(5)
         queue.enqueue('a')
@@ -170,6 +216,7 @@ class TestQueue(TestQueueTemplate, unittest.TestCase):
         queue.enqueue('e')
 
         self.assertEqual(str(queue), '[\'a\', \'b\', \'c\', \'d\', \'e\']')
+
 
     def test_str_with_empty_queue(self):
         queue = self.new_queue(5)
@@ -181,7 +228,7 @@ class TestQueueLinkedList(TestQueueTemplate, unittest.TestCase):
     """Runs the tests for a queue implemented with linked lists."""
     def new_queue(self):
         return QueueWithLinkedList()
-    
+
     def test_repr(self):
         queue = self.new_queue()
         self.assertEqual(repr(queue), 'Queue()')
