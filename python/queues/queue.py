@@ -55,7 +55,7 @@ class Queue:
             if self.is_empty():
                 return
             front = self._front
-            if front > self._rear:
+            if front >= self._rear:
                 while front < self._max_size:
                     yield self._data[front]
                     front += 1
