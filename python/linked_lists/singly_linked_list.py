@@ -138,6 +138,7 @@ class SinglyLinkedList:
         """
 
         self._head = None
+        self._size = 0
 
 
     def __len__(self):
@@ -217,12 +218,7 @@ class SinglyLinkedList:
             int: The number of nodes in the linked list.
         """
 
-        size = 0
-        current = self._head
-        while current is not None:
-            size += 1
-            current = current.next()
-        return size
+        return self._size
 
 
     def is_empty(self) -> bool:
@@ -249,6 +245,7 @@ class SinglyLinkedList:
 
         old_head = self._head
         self._head = SinglyLinkedList.Node(data, old_head)
+        self._size += 1
 
 
     def insert_to_back(self, data: Any) -> None:
@@ -269,6 +266,7 @@ class SinglyLinkedList:
             while current.next() is not None:
                 current = current.next()
             current.append(SinglyLinkedList.Node(data))
+        self._size += 1        
 
 
     def get(self, index):
@@ -378,6 +376,7 @@ class SinglyLinkedList:
                     self._head = current.next()
                 else:
                     previous.append(current.next())
+                self._size -= 1
                 return
             previous = current
             current = current.next()
@@ -403,4 +402,5 @@ class SinglyLinkedList:
             raise ValueError('Delete on an empty list.')
         data = self._head.data()
         self._head = self._head.next()
+        self._size -= 1
         return data
