@@ -241,7 +241,7 @@ class Graph:
             # Reconstruct the path from start to target by going back until it finds a vertex
             # without predecessor: That can only be the start vertex
             path = []
-            while target:
+            while target is not None:
                 path.append(target)
                 target = pred[target]
             return path[::-1]

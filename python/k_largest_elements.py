@@ -13,7 +13,7 @@ def k_largest_elements(arr, k):
                 heap._validate()
         else:
             heap.insert((i, arr[i]))
-    return [heap.top() for _ in range(k)]
+    return [heap.top() for _ in range(min(k, len(heap)))]
 
 if __name__ == '__main__':
     arr = [55, 71, 43, 59, 10, 20, 15, 44, 11, 234, 23,-45]
