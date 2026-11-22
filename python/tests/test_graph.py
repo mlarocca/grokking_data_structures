@@ -266,6 +266,22 @@ class TestGraph(unittest.TestCase):
         self.assertIsNone(result)
 
 
+    def test_bfs_falsy_vertex_keys(self):
+        # Keys like 0 or '' are valid but falsy: the start vertex must still be in the path
+        graph = Graph()
+        for key in (0, 1, 2):
+            graph.insert_vertex(key)
+        graph.insert_edge(0, 1)
+        graph.insert_edge(1, 2)
+        self.assertListEqual(graph.bfs(0, 2), [0, 1, 2])
+        self.assertListEqual(graph.bfs(0, 0), [0])
+
+        graph = Graph()
+        graph.insert_vertex('')
+        graph.insert_vertex('A')
+        graph.insert_edge('', 'A')
+        self.assertListEqual(graph.bfs('', 'A'), ['', 'A'])
+
     def test_bfs_invalid_arguments(self):
         graph = self.create_test_graph()
         with self.assertRaises(ValueError):
